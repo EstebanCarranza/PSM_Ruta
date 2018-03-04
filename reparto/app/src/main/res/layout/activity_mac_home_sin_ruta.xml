@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="com.twicky.estebancarranza.reparto.mac_home_sin_ruta"
+    tools:openDrawer="start">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/picUser"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+            <TextView
+                android:id="@+id/lblUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Esteban Carranza"
+                android:textAlignment="center"
+                android:textSize="35sp" />
+
+            <ImageView
+                android:id="@+id/picAlert"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_warning_black_24dp" />
+
+            <TextView
+                android:id="@+id/txtAlertMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:paddingBottom="25dp"
+                android:text="@string/txtAlert"
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="30sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lstBotones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>

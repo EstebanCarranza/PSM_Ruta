@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.twicky.estebancarranza.reparto.mac_login"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp"
+    android:theme="@style/Theme.AppCompat.NoActionBar"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:context="com.twicky.estebancarranza.reparto.mac_login"
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:cropToPadding="false"
+            android:scaleType="centerInside"
+            app:srcCompat="@mipmap/ic_launcher_" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/lblIniciarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:text="Iniciar sesión"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <AutoCompleteTextView
+        android:id="@+id/txtCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/prompt_email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/text_color"
+        android:textColorHint="@color/text_colorHint" />
+
+
+    <EditText
+        android:id="@+id/txtContrasenia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:lineSpacingExtra="8sp"
+        android:textColor="@color/text_color"
+        android:textColorHint="@color/text_colorHint"
+        android:textSize="18dp"
+        android:typeface="normal" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:paddingTop="5dp"
+        android:orientation="horizontal"
+        tools:context="com.twicky.estebancarranza.reparto.mac_login">
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:text="Iniciar sesión"
+            android:textColor="@color/text_colorBtn"
+            android:textColorHint="@color/text_colorHint" />
+
+        <Button
+            android:id="@+id/btnLoginFacebook"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:text="Iniciar sesión con facebook"
+            android:textColor="@color/text_colorBtn"
+            android:textColorHint="@color/text_colorHint" />
+    </LinearLayout>
+
+
+</LinearLayout>
