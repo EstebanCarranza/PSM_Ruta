@@ -1,21 +1,22 @@
 package com.twicky.estebancarranza.reparto;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 
-import com.twicky.estebancarranza.reparto.adapters.recycler_list;
+import com.twicky.estebancarranza.reparto.adapters.list_buttons;
+import com.twicky.estebancarranza.reparto.estaticos.ID;
 
 import java.util.ArrayList;
 
 public class mac_home_sin_ruta extends AppCompatActivity {
 
     ArrayList<String> listDatos;
-    ArrayList<recycler_list.Boton> listBotones;
+    ArrayList<list_buttons.Boton> listBotones;
     RecyclerView recycler;
 
 
@@ -23,12 +24,19 @@ public class mac_home_sin_ruta extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mac_home_sin_ruta);
+        getSupportActionBar().hide();
+
+      construirRecycler();
 
 
+    }
+
+    private void construirRecycler()
+    {
         recycler = (RecyclerView) findViewById(R.id.lstBotones);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         //listDatos = new ArrayList<String>();
-        listBotones = new ArrayList<recycler_list.Boton>();
+        listBotones = new ArrayList<list_buttons.Boton>();
         /*
         for(int i = 0; i < 10; i++)
         {
@@ -38,19 +46,42 @@ public class mac_home_sin_ruta extends AppCompatActivity {
         //listDatos.add("Cerrar sesión");
 
 
-        listBotones.add(0, new recycler_list.Boton(getString(R.string.btnIniciarRuta), getString(R.string.btnIniciarRutaDesc), "btnIniciarRuta"));
-        listBotones.add(1, new recycler_list.Boton(getString(R.string.btnCerrarSesion), getString(R.string.btnCerrarSesionDesc), "btnCerrarSesion"));
+        listBotones.add(new list_buttons.Boton(getString(R.string.btnIniciarRuta), getString(R.string.btnIniciarRutaDesc), ID.HSR.btnIniciarRuta));
+        listBotones.add(new list_buttons.Boton(getString(R.string.btnCerrarSesion), getString(R.string.btnCerrarSesionDesc), ID.HSR.btnCerrarSesion));
         /*
         listDatos.add("@string/txtAlert");
         listDatos.add("@string/txtAlert");*/
         ArrayList<Object> objListBotones = (ArrayList<Object>)(ArrayList<?>)(listBotones);
         //ArrayList<Object> objListDatos = (ArrayList<Object>)(ArrayList<?>)(listDatos);
-        //recycler_list adapter = new recycler_list(objListDatos);
-        recycler_list adapter = new recycler_list(objListBotones);
+        //list_buttons adapter = new list_buttons(objListDatos);
+        list_buttons adapter = new list_buttons(objListBotones);
+
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*Toast.makeText(getApplicationContext(),
+                        String.valueOf(listBotones.get(recycler.getChildAdapterPosition(view)).getTitulo()),
+                        Toast.LENGTH_SHORT).show();
+                */
+
+                switch(listBotones.get(recycler.getChildAdapterPosition(view)).getIdBoton())
+                {
+                    case ID.HSR.btnIniciarRuta: {
+                        Intent intentPRC = new Intent(mac_home_sin_ruta.this, mac_primera_carga.class);
+                        startActivity(intentPRC);
+                    }
+                    break;
+                    case ID.HSR.btnCerrarSesion:
+                        finish();
+                    break;
+                    default:break;
+                }
+
+
+            }
+        });
 
         recycler.setAdapter(adapter);
-
-
 
     }
 

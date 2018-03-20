@@ -24,7 +24,16 @@
     <string name="txtAlert">No te encuentras en ruta</string>
     <string name="txtAlertOK">Estás en ruta</string>
     <string name="btnIniciarRuta">Iniciar ruta</string>
+    <string name="btnRuta">Ruta</string>
+    <string name="btnRutaDesc">Ver detalles de la ruta actual</string>
+    <string name="btnAlmacen">Almacén</string>
+    <string name="btnAlmacenDesc">Ver detalles del almacén</string>
+    <string name="btnConfiguraciones">Configuraciones</string>
+    <string name="btnConfiguracionesDesc">Configurar notificaciones y otras cosas</string>
+
     <string name="btnIniciarRutaDesc">Asigna la ruta y hace la carga inicial del día</string>
+
+
     <string name="btnCerrarSesion">Cerrar sesión</string>
     <string name="btnCerrarSesionDesc">Cerrar sesión iniciada y cerrar la aplicación</string>
 
@@ -39,7 +48,18 @@
     <string name="btnMensajes">Mensajes</string>
     <string name="btnMensajesDesc">Desde aqui puede ver los mensajes del almacén</string>
 
+    <!-- Botones usados para primera carga del dia -->
+    <string name="btnVerProductos">Ver productos</string>
+    <string name="btnVerProductosDesc">Ver lista de productos actual mente cargados</string>
+    <string name="btnAgregarProd">Agregar productos</string>
+    <string name="btnAgregarProdDesc">Agregar productos sin asignar cliente</string>
+    <string name="btnConfirmarProd">Confirmar productos</string>
+    <string name="btnConfirmarProdDesc">Confirmar produtos que estarán en la ruta e iniciar ruta</string>
 
-
+    <!-- COC: Confirmar clientes -->
+    <string name="lblCOCTitulo">Confirma los clientes de la ruta</string>
+    <string name="lblCOCTotalRuta">Total de clientes en ruta</string>
+    <string name="lblCOCTotalRutaNoConfirmados">Total de clientes sin confirmar</string>
+    <string name="lblCOCTotalRutaNoAsignados">Total de clientes sin productos asignados</string>
 
 </resources>

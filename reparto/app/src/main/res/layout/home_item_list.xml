@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -18,9 +18,9 @@
         android:id="@+id/lblDescripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_color2"
         android:layout_weight="1"
         android:text="@string/btnIniciarRutaDesc"
+        android:textColor="@color/text_color2"
         android:textSize="12sp" />
 
 </LinearLayout>

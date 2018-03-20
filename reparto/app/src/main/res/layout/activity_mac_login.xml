@@ -8,8 +8,10 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="20dp"
-    android:theme="@style/Theme.AppCompat.NoActionBar"
+
     >
+
+
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,7 +21,8 @@
         android:gravity="center"
         android:orientation="horizontal"
         tools:context="com.twicky.estebancarranza.reparto.mac_login"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        >
 
         <ImageView
             android:layout_width="wrap_content"

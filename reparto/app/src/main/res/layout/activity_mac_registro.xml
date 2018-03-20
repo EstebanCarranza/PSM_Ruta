@@ -9,9 +9,9 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="20dp"
-    android:theme="@style/Theme.AppCompat.NoActionBar"
-    >
 
+    >
+    <!--android:theme="@style/Theme.AppCompat.NoActionBar"-->
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -19,7 +19,7 @@
         android:layout_height="50dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        tools:context="com.twicky.estebancarranza.reparto.MainActivity"
+        tools:context="com.twicky.estebancarranza.reparto.mac_registro"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <ImageView

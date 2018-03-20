@@ -21,10 +21,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mac_registro" />
-        <activity android:name=".mac_login" />
-        <activity android:name=".mac_home_sin_ruta" />
-        <activity android:name=".mac_home_con_ruta"></activity>
+        <activity
+            android:name=".mac_registro"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".mac_login"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".mac_home_sin_ruta"
+            android:parentActivityName=".mac_login" />
+        <activity
+            android:name=".mac_home_con_ruta"
+            android:parentActivityName=".mac_login" />
+        <activity
+            android:name=".mac_primera_carga"
+            android:parentActivityName=".mac_home_sin_ruta" />
+        <activity android:name=".mac_prc_confirmarCliente" />
+        <activity android:name=".mac_prc_productosCliente"></activity>
     </application>
 
 </manifest>

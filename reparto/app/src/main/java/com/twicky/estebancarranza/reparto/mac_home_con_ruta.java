@@ -4,35 +4,59 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
-import com.twicky.estebancarranza.reparto.adapters.recycler_list;
+import com.twicky.estebancarranza.reparto.adapters.list_buttons;
+import com.twicky.estebancarranza.reparto.estaticos.ID;
 
 import java.util.ArrayList;
 
 public class mac_home_con_ruta extends AppCompatActivity {
 
-    ArrayList<recycler_list.Boton> listBotones;
+    ArrayList<list_buttons.Boton> listBotones;
     RecyclerView recycler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mac_home_con_ruta);
+        getSupportActionBar().hide();
+        construirRecycler();
 
+
+
+    }
+
+    private void construirRecycler()
+    {
         recycler = (RecyclerView) findViewById(R.id.lstBotones);
+        listBotones = new ArrayList<list_buttons.Boton>();
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        listBotones = new ArrayList<recycler_list.Boton>();
+        listBotones.add( new list_buttons.Boton(getString(R.string.btnMensajes), getString(R.string.btnMensajesDesc), ID.HCR.btnMensajes));
+        listBotones.add( new list_buttons.Boton(getString(R.string.btnClientes), getString(R.string.btnClientesDesc), ID.HCR.btnClientes));
+        listBotones.add( new list_buttons.Boton(getString(R.string.btnRuta), getString(R.string.btnRutaDesc), ID.HCR.btnRuta));
+        listBotones.add( new list_buttons.Boton(getString(R.string.btnAlmacen), getString(R.string.btnAlmacenDesc), ID.HCR.btnAlmacen));
+        listBotones.add( new list_buttons.Boton(getString(R.string.btnConfiguraciones), getString(R.string.btnConfiguracionesDesc), ID.HCR.btnConfiguracion));
 
-        listBotones.add(0, new recycler_list.Boton(getString(R.string.btnMensajes), getString(R.string.btnMensajesDesc), "btnMensajes"));
-        listBotones.add(1, new recycler_list.Boton(getString(R.string.btnFinalizarRuta), getString(R.string.btnFinalizarRutaDesc), "btnFinalizarRuta"));
-        listBotones.add(2, new recycler_list.Boton(getString(R.string.btnDescargarMercancia), getString(R.string.btnDescargarMercanciaDesc), "btnDescargarMercancia"));
-        listBotones.add(3, new recycler_list.Boton(getString(R.string.btnRecargaMercancia), getString(R.string.btnRecargaMercanciaDesc), "btnRecargaMercancia"));
-        listBotones.add(4, new recycler_list.Boton(getString(R.string.btnClientes), getString(R.string.btnClientesDesc), "btnClientes"));
-        listBotones.add(5, new recycler_list.Boton(getString(R.string.btnCerrarSesion), getString(R.string.btnCerrarSesionDesc), "btnCerrarSesion"));
+        listBotones.add( new list_buttons.Boton(getString(R.string.btnCerrarSesion), getString(R.string.btnCerrarSesionDesc), ID.HCR.btnCerrarSesion));
 
 
         ArrayList<Object> objListBotones = (ArrayList<Object>)(ArrayList<?>)(listBotones);
-        recycler_list adapter = new recycler_list(objListBotones);
+        list_buttons adapter = new list_buttons(objListBotones);
+
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(mac_home_con_ruta.this, String.valueOf(listBotones.get(recycler.getChildAdapterPosition(view)).getTitulo()), Toast.LENGTH_SHORT).show();
+                switch(listBotones.get(recycler.getChildAdapterPosition(view)).getIdBoton())
+                {
+                    case ID.HCR.btnCerrarSesion:
+                        finish();
+                        break;
+                }
+            }
+        });
 
         recycler.setAdapter(adapter);
+
     }
 }

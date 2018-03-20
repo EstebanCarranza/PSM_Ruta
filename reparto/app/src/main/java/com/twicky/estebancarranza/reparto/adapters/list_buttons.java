@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.twicky.estebancarranza.reparto.R;
 
@@ -14,8 +15,22 @@ import java.util.ArrayList;
  * Created by esteban.carranza on 02/03/2018.
  */
 
-public class recycler_list extends RecyclerView.Adapter<recycler_list.ViewHolderDatos> {
+public class list_buttons extends RecyclerView.Adapter<list_buttons.ViewHolderDatos> implements View.OnClickListener{
     ArrayList<String> listDatos;
+    private View.OnClickListener listener;
+
+    public void setOnClickListener(View.OnClickListener listener)
+    {
+        this.listener = listener;
+    }
+    @Override
+    public void onClick(View view) {
+        if(listener!=null)
+        {
+            listener.onClick(view);
+        }
+    }
+
     public static class Boton
     {
         String titulo;
@@ -61,7 +76,7 @@ public class recycler_list extends RecyclerView.Adapter<recycler_list.ViewHolder
 
     ArrayList<Boton> botones;
 
-    public recycler_list()
+    public list_buttons()
     {
 
     }
@@ -71,7 +86,7 @@ public class recycler_list extends RecyclerView.Adapter<recycler_list.ViewHolder
         this.listDatos = listDatos;
     }*/
 
-    public recycler_list(ArrayList<Object> listDatos)
+    public list_buttons(ArrayList<Object> listDatos)
     {
         if(listDatos.get(0) instanceof Boton)
         {
@@ -88,6 +103,7 @@ public class recycler_list extends RecyclerView.Adapter<recycler_list.ViewHolder
     @Override
     public ViewHolderDatos onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item_list, null, false);
+        view.setOnClickListener(this);
         return new ViewHolderDatos(view);
     }
 
@@ -96,13 +112,24 @@ public class recycler_list extends RecyclerView.Adapter<recycler_list.ViewHolder
         //holder.asignarDatos(listDatos.get(position));
         holder.asignarDatos(botones.get(position).titulo.toString(), botones.get(position).descripcion.toString());
 
-        
+
+        //Toast.makeText(getApplicationContext(), "a", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public int getItemCount() {
         //return listDatos.size();
         return botones.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
     public class ViewHolderDatos extends RecyclerView.ViewHolder {

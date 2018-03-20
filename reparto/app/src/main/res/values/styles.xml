@@ -1,25 +1,31 @@
 <resources>
 
-    <!-- Base application theme.-->
+    <style name="AppTheme" parent="Theme.AppCompat">
+        <item name="android:colorBackground">@color/background_color</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:editTextColor">@color/text_color</item>
+    </style>
+    <!-- Base application theme.
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <!--- Customize your theme here. -->
-        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <<Customize your theme here.
+        <<item name="colorPrimary">@color/colorPrimary</item>
+        <<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <<item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/background_color</item>
         <item name="android:textColor">@color/text_color</item>
         <item name="android:editTextColor">@color/text_color</item>
 
-        <!--
-        <item name="android:hint">@color/text_colorHint</item>
-        <item name="android:textColorHint">@color/text_colorHint</item>
-        <item name="android:color">@color/text_color</item>
-        -->
 
-    </style>
 
+        <<item name="android:hint">@color/text_colorHint</item>
+        <<item name="android:textColorHint">@color/text_colorHint</item>
+        <<item name="android:color">@color/text_color</item>
+
+
+    </style>-->
+<!--
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
 
 </resources>
