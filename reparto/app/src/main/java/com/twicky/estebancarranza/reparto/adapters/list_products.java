@@ -1,5 +1,6 @@
 package com.twicky.estebancarranza.reparto.adapters;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +12,26 @@ import android.widget.Toast;
 
 import com.twicky.estebancarranza.reparto.R;
 import com.twicky.estebancarranza.reparto.datos.producto;
+import com.twicky.estebancarranza.reparto.estaticos.list_products_options;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import static com.twicky.estebancarranza.reparto.estaticos.list_products_options.restar;
+import static com.twicky.estebancarranza.reparto.estaticos.list_products_options.sumar;
+
 /**
  * Created by esteban.carranza on 12/03/2018.
  */
 
-public class list_products  extends RecyclerView.Adapter<list_products.ViewHolderDatos> implements View.OnClickListener{
+//clase que crea el adaptador para productos
+public class list_products
+//extensión de un recycler view, ya que ahí es donde se agregará el adaptador
+extends RecyclerView.Adapter<list_products.ViewHolderDatos>
+//se implementa el evento del click
+implements View.OnClickListener
+{
 
     ArrayList<producto> productos;
 
@@ -39,11 +50,69 @@ public class list_products  extends RecyclerView.Adapter<list_products.ViewHolde
         return new ViewHolderDatos(view);
     }
 
+    protected void data(Object elemento, int position, list_products_options type)
+    {
+        float total = 0;
+
+
+        EditText editText = elemento instanceof EditText ? ((EditText) elemento) : null;
+        if(editText != null)
+        {
+            if(!editText.getText().toString().isEmpty())
+            {
+                try
+                {
+                    total = Float.parseFloat(editText.getText().toString());
+                    switch (type)
+                    {
+                        case sumar:
+                            total++;
+                        break;
+                        case restar:
+                            total--;
+                        break;
+                        default:total= -1; break;
+                    }
+
+                }
+                catch (NumberFormatException e)
+                {
+                    total = -1;
+                }
+                editText.setText(String.valueOf(total));
+            }
+        }
+
+
+    }
     @Override
-    public void onBindViewHolder(list_products.ViewHolderDatos holder, int position) {
+    public void onBindViewHolder(final list_products.ViewHolderDatos holder, final int position) {
+
+
         holder.asignarDatos(this.productos.get(position));
-        holder.btnRestar.setOnClickListener(this);
-        holder.btnSumar.setOnClickListener(this);
+        holder.btnRestar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                data(holder.txtTotal, position, restar);
+            }
+        });
+        holder.btnSumar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                data(holder.txtTotal, position, sumar);
+
+            }
+        });
+        holder.fab_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                productos.remove(position);
+                notifyDataSetChanged();
+            }
+        });
+
     }
 
     @Override
@@ -61,10 +130,7 @@ public class list_products  extends RecyclerView.Adapter<list_products.ViewHolde
     public void onClick(View view) {
         if(listener!=null)
         {
-
-                    listener.onClick(view);
-
-
+            listener.onClick(view);
         }
     }
 
@@ -75,6 +141,7 @@ public class list_products  extends RecyclerView.Adapter<list_products.ViewHolde
         EditText txtTotal;
         Button btnRestar;
         Button btnSumar;
+        FloatingActionButton fab_delete;
 
 
 
@@ -85,7 +152,7 @@ public class list_products  extends RecyclerView.Adapter<list_products.ViewHolde
             txtTotal = (EditText) itemView.findViewById(R.id.txtTotal);
             btnRestar = (Button) itemView.findViewById(R.id.btnRestar);
             btnSumar = (Button) itemView.findViewById(R.id.btnSumar);
-
+            fab_delete = (FloatingActionButton) itemView.findViewById(R.id.fab_delete);
 
         }
 

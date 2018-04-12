@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lnlr_productos"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
-    android:background="@color/green"
+
     android:gravity="start"
     android:orientation="horizontal">
 
@@ -19,6 +19,25 @@
         android:layout_marginTop="5dp"
         app:cardBackgroundColor="@color/background_color"
         android:id="@+id/cardView">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_delete"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="top|end"
+
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="0dp"
+
+            android:clickable="true"
+            app:backgroundTint="@color/background_color"
+            app:elevation="0dp"
+            app:rippleColor="@color/cardview_dark_background"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -95,4 +114,4 @@
 
 
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
