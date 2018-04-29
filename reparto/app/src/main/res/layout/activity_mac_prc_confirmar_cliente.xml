@@ -104,8 +104,15 @@
                     android:layout_weight="1"
                     android:text="0"
                     android:textAlignment="textEnd" />
+
+
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btnConfirmarClienteCOC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btnGuardarCambiosCOC" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/lstClientes"
@@ -113,6 +120,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textAlignment="textStart">
+
 
             </android.support.v7.widget.RecyclerView>
 

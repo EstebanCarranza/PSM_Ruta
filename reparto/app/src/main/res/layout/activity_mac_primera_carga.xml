@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Primera carga del dia"
+                android:text="@string/strTitlePRC"
                 android:textAlignment="center"
                 android:textSize="30sp" />
 
@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Total de productos" />
+                    android:text="@string/strTotalProCargadosPRC" />
 
                 <TextView
                     android:id="@+id/lblTotalProdVal"

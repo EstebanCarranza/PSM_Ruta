@@ -1,5 +1,6 @@
 package com.twicky.estebancarranza.reparto;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.view.View;
 
 import com.twicky.estebancarranza.reparto.adapters.list_buttons;
 import com.twicky.estebancarranza.reparto.estaticos.ID;
+import com.twicky.estebancarranza.reparto.estaticos.layout;
 
 import java.util.ArrayList;
 
@@ -52,6 +54,19 @@ public class mac_home_con_ruta extends AppCompatActivity {
                     case ID.HCR.btnCerrarSesion:
                         finish();
                         break;
+
+                    case ID.HCR.btnMensajes:
+                        Intent irAMensajes = new Intent(mac_home_con_ruta.this, mac_mensajes.class);
+                        startActivity(irAMensajes);
+                    break;
+
+                    case ID.HCR.btnClientes:
+                        Intent irAClientesCRU = new Intent(mac_home_con_ruta.this, mac_prc_confirmarCliente.class);
+                        //layout.cliente_lista_CRU =
+                        irAClientesCRU.putExtra("tipoLayout", 4);
+                        irAClientesCRU.putExtra("title", getString(R.string.strClienteCRU_Title));
+                        startActivity(irAClientesCRU);
+                    break;
                 }
             }
         });

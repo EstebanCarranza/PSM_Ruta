@@ -10,7 +10,7 @@ public class ID {
     {
         public static final String btnIniciarRuta = "btnIniciarRuta";
         public static final String btnCerrarSesion = "btnCerrarSesion";
-        public static final String btnMensajes = "btnCerrarSesion";
+        public static final String btnMensajes = "btnMensajes";
         public static final String btnClientes = "btnClientes";
         public static final String btnRuta = "btnRuta";
         public static final String btnAlmacen = "btnAlmacen";
@@ -24,11 +24,12 @@ public class ID {
         public static final String btnCerrarSesion = "btnCerrarSesion";
     }
 
-    public static class PRC //Primera carga
+    public static class CDI //Primera carga
     {
         public static final String btnVerProductos = "btnVerProductos";
         public static final String btnAgregarProd = "btnAgregarProd";
         public static final String btnConfirmarProd = "btnConfirmarProd";
+        public static final String btnGuardarCambiosPRC = "btnGuardarCambiosPRC";
     }
 
 

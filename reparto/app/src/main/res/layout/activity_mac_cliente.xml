@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context="com.twicky.estebancarranza.reparto.mac_cliente">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/lblTitleClienteCRU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/strClienteCRU_Info"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/btnGuardarClienteCRU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/GUARDAR"
+                android:textColor="@color/background_color" />
+
+            <TextView
+                android:id="@+id/lblRFC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/strRFCCRU"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/txtRFCCRU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/strRFCCRU"
+                android:inputType="textAutoCorrect|textAutoComplete"
+                android:textColorHint="@color/text_colorHint" />
+
+
+            <TextView
+                android:id="@+id/lblNombreClienteCRU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/strNombreClienteCRU"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/txtNombreClienteCRU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/strNombreClienteCRU"
+                android:inputType="textAutoCorrect|textAutoComplete"
+                android:textColorHint="@color/text_colorHint" />
+
+            <TextView
+                android:id="@+id/lblRegimenFiscal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3sp"
+                android:text="@string/strRegimenFiscalCRU"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/cbxRegimenFiscal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_color"
+                android:padding="10sp"
+                android:popupBackground="@color/background_color"
+                android:spinnerMode="dialog"
+                android:text="@color/background_color"
+                android:textColor="@color/background_color" />
+
+            <TextView
+                android:id="@+id/lblDireccionClienteCRU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/strDireccionClienteCRU"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/txtDireccionClienteCRU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/strDireccionClienteCRU"
+                android:inputType="text|textAutoCorrect|textAutoComplete"
+                android:textColorHint="@color/text_colorHint" />
+
+            <TextView
+                android:id="@+id/lblTelefonoClienteCRU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/strTelefonoClienteCRU"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/txtTelefonoClienteCRU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/strTelefonoClienteCRU"
+                android:inputType="number"
+                android:textColorHint="@color/text_colorHint" />
+
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

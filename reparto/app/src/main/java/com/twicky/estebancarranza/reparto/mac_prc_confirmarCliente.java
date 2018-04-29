@@ -6,14 +6,18 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.twicky.estebancarranza.reparto.adapters.list_clients;
 import com.twicky.estebancarranza.reparto.datos.cliente;
+import com.twicky.estebancarranza.reparto.datos.custom_parameter;
 import com.twicky.estebancarranza.reparto.estaticos.ID;
 import com.twicky.estebancarranza.reparto.estaticos.estado_cliente;
 
 import java.util.ArrayList;
+import com.twicky.estebancarranza.reparto.estaticos.layout;
 
 public class mac_prc_confirmarCliente extends AppCompatActivity {
     
@@ -23,6 +27,12 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
     TextView tvTotalClientesNoConfirmadosVal;
     TextView tvTotalClientesNoAsignadosVal;
     list_clients adapter;
+    Button btnConfirmarClienteCOC;
+    custom_parameter opciones_adicionales;
+    TextView lblConfirmarClientes;
+    TextView lblTotalClientes;
+    TextView lblTotalClientesNoConfirmados;
+    TextView lblTotalClientesAsignados;
 
     private int contarClientesSinAsignar()
     {
@@ -50,17 +60,81 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
 
         return total;
     }
-    
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mac_prc_confirmar_cliente);
-        construirRecycler();
 
+    private void  botonGuardar()
+    {
+        btnConfirmarClienteCOC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mac_prc_confirmarCliente.this, "Cambios guardados", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+    }
+    
+    private void inicializarElementos()
+    {
+        
+        opciones_adicionales = new custom_parameter();
+        btnConfirmarClienteCOC = (Button) findViewById(R.id.btnConfirmarClienteCOC);
+        //Etiquetas
+        lblConfirmarClientes = (TextView) findViewById(R.id.lblConfirmarClientes);
+        lblTotalClientes = (TextView) findViewById(R.id.lblTotalClientes);
+        lblTotalClientesNoConfirmados = (TextView) findViewById(R.id.lblTotalClientesNoConfirmados);
+        lblTotalClientesAsignados = (TextView) findViewById(R.id.lblTotalClientesAsignados);
+
+
+        //Valores
         tvTotalClientesVal = (TextView) findViewById(R.id.lblTotalClientesVal);
         tvTotalClientesNoAsignadosVal= (TextView) findViewById(R.id.lblTotalClientesNoAsignadosVal);
         tvTotalClientesNoConfirmadosVal= (TextView) findViewById(R.id.lblTotalClientesNoConfirmadosVal);
 
+        int nextLayout = getIntent().getExtras().getInt("tipoLayout");
+        String title = getIntent().getExtras().getString("title");
+
+        if(title.isEmpty())
+           title = lblConfirmarClientes.getText().toString();
+
+            try {
+                if (nextLayout >= 0) {
+                    opciones_adicionales.setTipoLayout(layout.fromInteger(nextLayout));
+
+                    switch (opciones_adicionales.getTipoLayout()) {
+                        case cliente_lista_confirmar:
+                            lblConfirmarClientes.setText(title);
+                            Toast.makeText(this, "Entraste a confirmar clientes", Toast.LENGTH_SHORT).show();
+                            break;
+                        case cliente_lista_CRU:
+                            Toast.makeText(this, "Entraste para hacer CRUD de clientes", Toast.LENGTH_SHORT).show();
+                            lblConfirmarClientes.setText(title);
+                            btnConfirmarClienteCOC.setVisibility(View.GONE);
+
+                            tvTotalClientesNoConfirmadosVal.setVisibility(View.GONE);
+                            tvTotalClientesNoAsignadosVal.setVisibility(View.GONE);
+                            tvTotalClientesVal.setVisibility(View.GONE);
+
+                            lblTotalClientes.setVisibility(View.GONE);
+                            lblTotalClientesAsignados.setVisibility(View.GONE);
+                            lblTotalClientesNoConfirmados.setVisibility(View.GONE);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            } catch (Exception e) {
+
+            }
+
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mac_prc_confirmar_cliente);
+        
+       inicializarElementos();
+        
+        botonGuardar();
+        construirRecycler();
 
         tvTotalClientesVal.setText(String.valueOf(listCliente.size()));
         
@@ -92,21 +166,46 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
 
         ArrayList<Object> objlistCliente = (ArrayList<Object>)(ArrayList<?>)(listCliente);
 
-        adapter = new list_clients(objlistCliente);
+        if(opciones_adicionales != null)
+            adapter = new list_clients(objlistCliente, opciones_adicionales);
+        else
+            adapter = new list_clients(objlistCliente);
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                listCliente.get(recycler.getChildAdapterPosition(view)).setEstadoActual(estado_cliente.confirmado);
-                adapter.notifyDataSetChanged();
-                tvTotalClientesVal.setText(String.valueOf(listCliente.size()));
-                tvTotalClientesNoAsignadosVal.setText(String.valueOf(contarClientesSinAsignar()));
-                tvTotalClientesNoConfirmadosVal.setText(String.valueOf(contarClientesSinConfirmar()));
+                if(opciones_adicionales != null) 
+                {
+                    switch(opciones_adicionales.getTipoLayout())
+                    {
+                        case cliente_lista_confirmar:
+                            listCliente.get(recycler.getChildAdapterPosition(view)).setEstadoActual(estado_cliente.confirmado);
+                            adapter.notifyDataSetChanged();
 
-                //Abrir productos por confirmar
-                Intent prodConfirm = new Intent(mac_prc_confirmarCliente.this, mac_prc_productosCliente.class);
-                startActivity(prodConfirm);
+
+                            tvTotalClientesVal.setText(String.valueOf(listCliente.size()));
+                            tvTotalClientesNoAsignadosVal.setText(String.valueOf(contarClientesSinAsignar()));
+                            tvTotalClientesNoConfirmadosVal.setText(String.valueOf(contarClientesSinConfirmar()));
+
+                            //Abrir productos por confirmar
+
+                            Intent prodConfirm = new Intent(mac_prc_confirmarCliente.this, mac_prc_productosCliente.class);
+                            // layout.producto_por_cliente
+                            prodConfirm.putExtra("titulo", "Productos por cliente");
+                            prodConfirm.putExtra("tipoLayout", 0);
+                            startActivity(prodConfirm);
+                        break;
+                        case cliente_lista_CRU:
+                            Toast.makeText(mac_prc_confirmarCliente.this, "Se abrirá el CRU de Cliente", Toast.LENGTH_SHORT).show();
+                            Intent clienteCRUD = new Intent(mac_prc_confirmarCliente.this, mac_cliente.class);
+                            startActivity(clienteCRUD);
+                        break;
+                        default: break;
+                    }
+                    
+                }
+                
 
 
             }

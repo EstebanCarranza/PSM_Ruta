@@ -48,18 +48,59 @@
     <string name="btnMensajes">Mensajes</string>
     <string name="btnMensajesDesc">Desde aqui puede ver los mensajes del almacén</string>
 
-    <!-- Botones usados para primera carga del dia -->
-    <string name="btnVerProductos">Ver productos</string>
-    <string name="btnVerProductosDesc">Ver lista de productos actual mente cargados</string>
-    <string name="btnAgregarProd">Agregar productos</string>
-    <string name="btnAgregarProdDesc">Agregar productos sin asignar cliente</string>
-    <string name="btnConfirmarProd">Confirmar productos</string>
-    <string name="btnConfirmarProdDesc">Confirmar produtos que estarán en la ruta e iniciar ruta</string>
+    <!-- <> Botones usados para primera carga del dia (PRC) -->
+    <string name="btnConfirmarProd">Confirmar productos por cliente</string>
+    <string name="btnConfirmarProdDesc">Confirmar produtos que tendrá cada cliente en la ruta</string>
+    <string name="btnVerProductos">Ver productos cargados</string>
+    <string name="btnVerProductosDesc">Ver lista de productos actualmente cargados</string>
+    <string name="btnAgregarProd">Agregar productos sin cliente</string>
+    <string name="btnAgregarProdDesc">Agregar productos sin asignar cliente (para venta extraordinaria)</string>
+    <string name="btnGuardarCambiosPRC">Guardar cambios y empezar la ruta</string>
+    <string name="btnGuardarCambiosPRCDesc">Guarda todos los cambios realizados e inicializa la ruta</string>
+
+    <!-- </> Botones usados para primera carga del dia (PRC) -->
+    <!-- <> Textos usados para primera carga del dia (PRC) -->
+    <string name="strTitlePRC">Primera carga del dia</string>
+    <string name="strTotalProCargadosPRC">Total de productos cargados</string>
+
+    <!-- </> Textos usados para primera carga del dia (PRC) -->
+
 
     <!-- COC: Confirmar clientes -->
     <string name="lblCOCTitulo">Confirma los clientes de la ruta</string>
     <string name="lblCOCTotalRuta">Total de clientes en ruta</string>
     <string name="lblCOCTotalRutaNoConfirmados">Total de clientes sin confirmar</string>
     <string name="lblCOCTotalRutaNoAsignados">Total de clientes sin productos asignados</string>
+    <string name="title_activity_mac_mensajes">mac_mensajes</string>
+    <string name="btnGuardarCambiosCOC">Guardar cambios</string>
+    <!-- COC: Confirmar clientes -->
+
+    <!-- -->
+    <string name="ACEPTAR">ACEPTAR</string>
+    <string name="RECHAZAR">RECHAZAR</string>
+    <string name="CANCELAR">CANCELAR</string>
+    <string name="GUARDAR">GUARDAR CAMBIOS</string>
+
+    <!-- <> PPC Productos por cliente -->
+    <string name="strTitlePPC">Productos por cliente</string>
+    <string name="strTitlePPC1">Agregar productos sin cliente</string>
+    <string name="strTitlePPC2">Lista de productos</string>
+    <!-- </> PPC Productos por cliente -->
+
+    <!-- <>  MSG Mensajes -->
+    <string name="strEnviarMSG">Escribir mensaje</string>
+    <!-- </> MSG Mensajes -->
+
+    <!-- <> Clientes CRU -->
+    <string name="strClienteCRU_Title">Listado de clientes de almacén</string>
+    <string name="strClienteCRU_Info">Información del cliente</string>
+    <string name="strRFCCRU">RFC</string>
+    <string name="strNombreClienteCRU">Razon social</string>
+    <string name="strRegimenFiscalCRU">Regimen Fiscal</string>
+    <string name="strDireccionClienteCRU">Dirección</string>
+    <string name="strTelefonoClienteCRU">Telefono</string>
+    <!-- </> Clientes CRU -->
+
+
 
 </resources>
