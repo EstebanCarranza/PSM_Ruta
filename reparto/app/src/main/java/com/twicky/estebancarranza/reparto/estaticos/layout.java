@@ -9,7 +9,8 @@ public enum layout {
     producto_sin_cliente,
     producto_vista,
     cliente_lista_confirmar,
-    cliente_lista_CRU
+    cliente_lista_CRU,
+    producto_por_entregar
     ;
 
     public static layout fromInteger(int x) {
@@ -25,6 +26,10 @@ public enum layout {
                 return cliente_lista_confirmar;
             case 4:
                 return cliente_lista_CRU;
+
+            case 5: producto_por_entregar:
+                return producto_por_entregar;
+
         }
         return null;
     }
@@ -44,6 +49,9 @@ public enum layout {
 
             case "cliente_lista_CRU":
                 return cliente_lista_CRU;
+
+            case "producto_por_entregar":
+                return producto_por_entregar;
         }
         return null;
     }

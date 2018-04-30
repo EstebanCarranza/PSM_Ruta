@@ -14,7 +14,11 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_mac_home_sin_ruta">mac_home_sin_ruta</string>
+    <!-- TITULOS DE ACTIVITYS -->
+    <string name="title_activity_mac_home_sin_ruta">Sin ruta</string>
+    <string name="title_activity_mac_ruta">Ruta</string>
+    <string name="title_activity_mac_cliente">Clientes</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -85,6 +89,7 @@
     <string name="strTitlePPC">Productos por cliente</string>
     <string name="strTitlePPC1">Agregar productos sin cliente</string>
     <string name="strTitlePPC2">Lista de productos</string>
+    <string name="strTitlePPC3">Lista de productos que faltan por entregar</string>
     <!-- </> PPC Productos por cliente -->
 
     <!-- <>  MSG Mensajes -->
@@ -99,8 +104,51 @@
     <string name="strRegimenFiscalCRU">Regimen Fiscal</string>
     <string name="strDireccionClienteCRU">Dirección</string>
     <string name="strTelefonoClienteCRU">Telefono</string>
+
+
     <!-- </> Clientes CRU -->
 
+    <!-- <> Ruta menu -->
+    <string name="strRUTA">Opciones de ruta</string>
+    <string name="strTotalProductosRUTA">Total de productos por entregar</string>
+    <string name="strVerProductosTitleRUTA">Ver productos por entregar</string>
+    <string name="strVerProductosDescRUTA">Ver los productos que faltan por entregar</string>
 
+    <string name="strEntregaMercanciaTitleRUTA">Entrega de mercancía</string>
+    <string name="strEntregarMercanciaDescRUTA">Entregar mercancía al cliente de la ruta</string>
 
+    <string name="strRecogerMercanciaTitleRUTA">Recoger mercancía</string>
+    <string name="strRecogerMercanciaDescRUTA">Recoger la mercancía devuelta por el cliente</string>
+
+    <string name="strVerUbicacionClientesTitleRUTA">Ver ubicación de clientes</string>
+    <string name="strVerUbicacionClientesDescRUTA">Ver ubicación en Google Maps de los clientes que están en ruta</string>
+
+    <string name="strFinalizarRutaTitleRUTA">Finalizar ruta</string>
+    <string name="strFinalizarRutaDescRUTA">Finaliza la ruta y genera el corte para vaciar la información en el almacén</string>
+    <string name="title_activity_mac_ubicacion_cliente">Ubicacion de clientes</string>
+
+    <!-- </> Ruta menu -->
+
+    <string name="strCONFIG">Configuraciones</string>
+    <string name="strCONFIG_CambiarTemaTitle">Cambiar el tema</string>
+    <string name="strCONFIG_CambiarTemaDesc">Cambiar el tema de la aplicación</string>
+
+    <string name="strCONFIG_CambiarPrecisionTitle">Cambiar presición</string>
+    <string name="strCONFIG_CambiarPrecisionDesc">Cambiar el tipo de presición Alta, media o baja</string>
+
+    <string name="strCONFIG_PINTitle">Agregar PIN</string>
+    <string name="strCONFIG_PINDesc">Pedirá PIN la proxima vez que inicie la app</string>
+
+    <string name="strCONFIG_DatosUsuarioTitle">Mis datos personales</string>
+    <string name="strCONFIG_DatosUsuarioDesc">Permite editar y ver los datos personales de la cuenta</string>
+
+    <string name="strCONFIG_CerrarSesionTitle">Cerrar sesión</string>
+    <string name="strCONFIG_CerrarSesionDesc">Permite cerrar sesión e iniciar con otra cuenta de usuario</string>
+    <string name="title_activity_mac_temas">mac_temas</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- PIN -->
+    <string name="strPIN_Title">Asignar o cambiar el PIN</string>
+    <string name="strPIN_Text">1234</string>
+    <string name="strPIN_Boton">Guardar o cambiar pin</string>
 </resources>

@@ -3,6 +3,7 @@ package com.twicky.estebancarranza.reparto;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,7 +19,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class mac_mensajes extends Activity {
+public class mac_mensajes extends AppCompatActivity {
 
     RecyclerView recycler;
     list_messages adapter;
@@ -30,6 +31,9 @@ public class mac_mensajes extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mac_mensajes);
+        getSupportActionBar().setTitle("Regresar");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         btnEnviarMSG = (Button) findViewById(R.id.btnEnviarMSG);
         txtEnviarMSG = (TextView) findViewById(R.id.txtEnviarMSG);
         construirRecycler();

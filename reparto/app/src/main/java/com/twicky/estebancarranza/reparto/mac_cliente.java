@@ -21,6 +21,9 @@ public class mac_cliente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mac_cliente);
 
+        getSupportActionBar().setTitle("Regresar");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         cbxRegimenFiscal = (Spinner) findViewById(R.id.cbxRegimenFiscal);
 
         listRegimenFiscal = new ArrayList<>();

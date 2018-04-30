@@ -57,6 +57,9 @@ public class mac_prc_productosCliente extends AppCompatActivity {
                     case producto_vista:
                         btnGuardarPPC.setVisibility(View.GONE);
                     break;
+                    case producto_por_entregar:
+                        btnGuardarPPC.setVisibility(View.GONE);
+                    break;
                     default:break;
                 }
                 Toast.makeText(this, "Aux: " + aux, Toast.LENGTH_SHORT).show();
@@ -95,7 +98,7 @@ public class mac_prc_productosCliente extends AppCompatActivity {
 
         recycler.setAdapter(adapter);
 
-    }
+}
 
     private void botonGuardar()
     {

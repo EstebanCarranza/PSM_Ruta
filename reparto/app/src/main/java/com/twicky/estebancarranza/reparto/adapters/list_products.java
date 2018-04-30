@@ -217,6 +217,13 @@ implements View.OnClickListener
                         fab_delete.hide();
 
                     break;
+
+                    case producto_por_entregar:
+                        btnRechazarPPC.setVisibility(View.GONE);
+                        btnConfirmarPPC.setVisibility(View.GONE);
+
+                        fab_delete.hide();
+                    break;
                     default:
                         break;
                 }

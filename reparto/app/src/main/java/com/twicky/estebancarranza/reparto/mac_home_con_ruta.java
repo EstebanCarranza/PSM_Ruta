@@ -39,7 +39,7 @@ public class mac_home_con_ruta extends AppCompatActivity {
         listBotones.add( new list_buttons.Boton(getString(R.string.btnAlmacen), getString(R.string.btnAlmacenDesc), ID.HCR.btnAlmacen));
         listBotones.add( new list_buttons.Boton(getString(R.string.btnConfiguraciones), getString(R.string.btnConfiguracionesDesc), ID.HCR.btnConfiguracion));
 
-        listBotones.add( new list_buttons.Boton(getString(R.string.btnCerrarSesion), getString(R.string.btnCerrarSesionDesc), ID.HCR.btnCerrarSesion));
+
 
 
         ArrayList<Object> objListBotones = (ArrayList<Object>)(ArrayList<?>)(listBotones);
@@ -51,9 +51,6 @@ public class mac_home_con_ruta extends AppCompatActivity {
                 //Toast.makeText(mac_home_con_ruta.this, String.valueOf(listBotones.get(recycler.getChildAdapterPosition(view)).getTitulo()), Toast.LENGTH_SHORT).show();
                 switch(listBotones.get(recycler.getChildAdapterPosition(view)).getIdBoton())
                 {
-                    case ID.HCR.btnCerrarSesion:
-                        finish();
-                        break;
 
                     case ID.HCR.btnMensajes:
                         Intent irAMensajes = new Intent(mac_home_con_ruta.this, mac_mensajes.class);
@@ -67,6 +64,17 @@ public class mac_home_con_ruta extends AppCompatActivity {
                         irAClientesCRU.putExtra("title", getString(R.string.strClienteCRU_Title));
                         startActivity(irAClientesCRU);
                     break;
+
+                    case ID.HCR.btnRuta:
+                        Intent irARuta = new Intent(mac_home_con_ruta.this, mac_ruta.class);
+                        startActivity(irARuta);
+                    break;
+
+                    case ID.HCR.btnConfiguracion:
+                        Intent irAConfiguracion = new Intent(mac_home_con_ruta.this, mac_configuracion.class);
+                        startActivity(irAConfiguracion);
+                    break;
+
                 }
             }
         });

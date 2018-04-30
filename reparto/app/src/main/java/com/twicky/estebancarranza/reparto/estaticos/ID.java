@@ -32,9 +32,23 @@ public class ID {
         public static final String btnGuardarCambiosPRC = "btnGuardarCambiosPRC";
     }
 
+    public static class RUTA
+    {
+        public static final String btnVerProductos = "btnVerProductos";
+        public static final String btnEntregarMercancia = "btnEntregarMercancia";
+        public static final String btnRecogerMercancia = "btnRecogerMercancia";
+        public static final String btnAbrirMapa = "btnAbrirMapa";
+        public static final String btnFinalizarRuta = "btnFinalizarRuta";
+    }
 
-
-
+    public static class CONFIG
+    {
+        public static final String btnCambiarTema = "btnCambiarTema";
+        public static final String btnCambiarPrecision = "btnCambiarPrecision";
+        public static final String btnAgregarPIN = "btnAgregarPIN";
+        public static final String btnVerDatosPersonales = "btnVerDatosPersonales";
+        public static final String btnCerrarSesion = "btnCerrarSesion";
+    }
 
 
 
