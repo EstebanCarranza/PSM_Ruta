@@ -26,6 +26,13 @@
                 android:textSize="30sp" />
 
             <Button
+                android:id="@+id/btnCargarClienteCRU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/GUARDAR"
+                android:textColor="@color/background_color" />
+
+            <Button
                 android:id="@+id/btnGuardarClienteCRU"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -11,12 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.twicky.estebancarranza.reparto.adapters.list_clients;
+import com.twicky.estebancarranza.reparto.database.helpers.clienteSQL;
 import com.twicky.estebancarranza.reparto.datos.cliente;
 import com.twicky.estebancarranza.reparto.datos.custom_parameter;
 import com.twicky.estebancarranza.reparto.estaticos.ID;
 import com.twicky.estebancarranza.reparto.estaticos.estado_cliente;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.twicky.estebancarranza.reparto.estaticos.layout;
 
 public class mac_prc_confirmarCliente extends AppCompatActivity {
@@ -33,6 +36,7 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
     TextView lblTotalClientes;
     TextView lblTotalClientesNoConfirmados;
     TextView lblTotalClientesAsignados;
+    Button btnCrearClienteCOC;
 
     private int contarClientesSinAsignar()
     {
@@ -71,12 +75,23 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
             }
         });
     }
-    
+
+    private void botonAbrirCRU()
+    {
+        btnCrearClienteCOC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent clienteCRUD = new Intent(mac_prc_confirmarCliente.this, mac_cliente.class);
+                startActivity(clienteCRUD);
+            }
+        });
+    }
     private void inicializarElementos()
     {
         
         opciones_adicionales = new custom_parameter();
         btnConfirmarClienteCOC = (Button) findViewById(R.id.btnConfirmarClienteCOC);
+        btnCrearClienteCOC = (Button) findViewById(R.id.btnCrearClienteCOC);
         //Etiquetas
         lblConfirmarClientes = (TextView) findViewById(R.id.lblConfirmarClientes);
         lblTotalClientes = (TextView) findViewById(R.id.lblTotalClientes);
@@ -102,6 +117,7 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
                     switch (opciones_adicionales.getTipoLayout()) {
                         case cliente_lista_confirmar:
                             lblConfirmarClientes.setText(title);
+                            btnCrearClienteCOC.setVisibility(View.GONE);
                             Toast.makeText(this, "Entraste a confirmar clientes", Toast.LENGTH_SHORT).show();
                             break;
                         case cliente_lista_CRU:
@@ -116,6 +132,8 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
                             lblTotalClientes.setVisibility(View.GONE);
                             lblTotalClientesAsignados.setVisibility(View.GONE);
                             lblTotalClientesNoConfirmados.setVisibility(View.GONE);
+
+
                             break;
                         default:
                             break;
@@ -134,6 +152,8 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
        inicializarElementos();
         
         botonGuardar();
+        botonAbrirCRU();
+
         construirRecycler();
 
         tvTotalClientesVal.setText(String.valueOf(listCliente.size()));
@@ -150,7 +170,12 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
 
         listCliente = new ArrayList<cliente>();
 
+        clienteSQL db = new clienteSQL(getApplicationContext());
 
+        listCliente = db.getCliente(1,1);
+
+
+/*
         listCliente.add(new cliente("Esteban CarranzaNew","Virgilio cardenas 1401-D", estado_cliente.confirmado));
         listCliente.add(new cliente("Esteban Carranza","Virgilio cardenas 1401-D", estado_cliente.sinAsignar));
         listCliente.add(new cliente("Esteban Carranza","Virgilio cardenas 1401-D",estado_cliente.sinConfirmar));
@@ -161,7 +186,7 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
         listCliente.add(new cliente("Esteban Carranza","Virgilio cardenas 1401-D",estado_cliente.sinAsignar));
 
 
-
+*/
 
 
         ArrayList<Object> objlistCliente = (ArrayList<Object>)(ArrayList<?>)(listCliente);
@@ -199,6 +224,7 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
                         case cliente_lista_CRU:
                             Toast.makeText(mac_prc_confirmarCliente.this, "Se abrirá el CRU de Cliente", Toast.LENGTH_SHORT).show();
                             Intent clienteCRUD = new Intent(mac_prc_confirmarCliente.this, mac_cliente.class);
+                            clienteCRUD.putExtra("idCliente", listCliente.get(recycler.getChildAdapterPosition(view)).getId());
                             startActivity(clienteCRUD);
                         break;
                         default: break;
@@ -212,6 +238,8 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
         });
 
         recycler.setAdapter(adapter);
+
+
 
     }
 }

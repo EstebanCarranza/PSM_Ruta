@@ -8,8 +8,13 @@ import com.twicky.estebancarranza.reparto.estaticos.estado_cliente;
 
 public class cliente {
     private int id;
+    private String rfc;
     private String nombre;
+    private int idRegimenFiscal;
     private String domicilio;
+    private String telefono;
+    private String coordenada;
+    private estado_cliente estadoActual;
 
     public estado_cliente getEstadoActual() {
         return estadoActual;
@@ -19,7 +24,7 @@ public class cliente {
         this.estadoActual = estadoActual;
     }
 
-    private estado_cliente estadoActual;
+
 
     public cliente() {
     }
@@ -44,5 +49,45 @@ public class cliente {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getRfc() {
+        return rfc;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
+    }
+
+    public int getIdRegimenFiscal() {
+        return idRegimenFiscal;
+    }
+
+    public void setIdRegimenFiscal(int idRegimenFiscal) {
+        this.idRegimenFiscal = idRegimenFiscal;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCoordenada() {
+        return coordenada;
+    }
+
+    public void setCoordenada(String coordenada) {
+        this.coordenada = coordenada;
     }
 }

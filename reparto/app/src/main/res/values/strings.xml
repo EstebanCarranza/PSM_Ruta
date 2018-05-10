@@ -97,6 +97,7 @@
     <!-- </> MSG Mensajes -->
 
     <!-- <> Clientes CRU -->
+    <string name="strClienteCRU_CrearCliente">Crear nuevo cliente</string>
     <string name="strClienteCRU_Title">Listado de clientes de almacén</string>
     <string name="strClienteCRU_Info">Información del cliente</string>
     <string name="strRFCCRU">RFC</string>
