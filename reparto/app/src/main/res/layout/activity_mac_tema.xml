@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.twicky.estebancarranza.reparto.mac_tema">
+    tools:context="com.twicky.estebancarranza.reparto.activities.mac_tema">
 
     <ScrollView
         android:layout_width="match_parent"

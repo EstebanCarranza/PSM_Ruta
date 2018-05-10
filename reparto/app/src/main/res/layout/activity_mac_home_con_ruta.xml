@@ -9,7 +9,7 @@ android:fitsSystemWindows="true"
 android:orientation="vertical"
 android:padding="20dp"
 tools:openDrawer="start"
-tools:context="com.twicky.estebancarranza.reparto.mac_home_con_ruta">
+tools:context="com.twicky.estebancarranza.reparto.activities.mac_home_con_ruta">
 
 
 

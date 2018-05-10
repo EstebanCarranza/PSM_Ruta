@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.twicky.estebancarranza.reparto.mac_ruta">
+    tools:context="com.twicky.estebancarranza.reparto.activities.mac_ruta">
 
     <ScrollView
         android:layout_width="match_parent"

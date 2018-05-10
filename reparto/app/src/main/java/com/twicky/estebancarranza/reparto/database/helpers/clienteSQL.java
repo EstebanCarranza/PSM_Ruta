@@ -3,14 +3,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.LinkAddress;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.twicky.estebancarranza.reparto.database.SQLHelper;
 import com.twicky.estebancarranza.reparto.database.tables.tbl_psm_cliente;
-import com.twicky.estebancarranza.reparto.datos.cliente;
+import com.twicky.estebancarranza.reparto.models.cliente;
 import com.twicky.estebancarranza.reparto.estaticos.estado_cliente;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by esteban.carranza on 10/05/2018.
@@ -22,21 +23,24 @@ public class clienteSQL extends SQLHelper {
         super(context);
     }
 
-    public void insert(cliente Cliente)
+    public long insert(cliente Cliente)
     {
+        long id = 0;
         ContentValues values = new ContentValues();
         values.put(tbl_psm_cliente.column.name.rfc, Cliente.getRfc());
         values.put(tbl_psm_cliente.column.name.razonSocial, Cliente.getNombre());
         values.put(tbl_psm_cliente.column.name.direccion, Cliente.getDomicilio());
         values.put(tbl_psm_cliente.column.name.telefono, Cliente.getTelefono());
-        values.put(tbl_psm_cliente.column.name.coordenada, Cliente.getCoordenada());
+        values.put(tbl_psm_cliente.column.name.latitude, Cliente.getCoordenada().latitude);
+        values.put(tbl_psm_cliente.column.name.longitude, Cliente.getCoordenada().longitude);
+
 
         SQLiteDatabase db = getWritableDatabase();
 
-        long id = db.insert(tbl_psm_cliente.name, null, values);
+         id = db.insert(tbl_psm_cliente.name, null, values);
 
         db.close();
-
+        return id;
     }
     public void update(cliente Cliente)
     {
@@ -45,7 +49,8 @@ public class clienteSQL extends SQLHelper {
         values.put(tbl_psm_cliente.column.name.razonSocial, Cliente.getNombre());
         values.put(tbl_psm_cliente.column.name.direccion, Cliente.getDomicilio());
         values.put(tbl_psm_cliente.column.name.telefono, Cliente.getTelefono());
-        values.put(tbl_psm_cliente.column.name.coordenada, Cliente.getCoordenada());
+        values.put(tbl_psm_cliente.column.name.latitude, Cliente.getCoordenada().latitude);
+        values.put(tbl_psm_cliente.column.name.longitude, Cliente.getCoordenada().longitude);
 
         SQLiteDatabase db = getWritableDatabase();
 
@@ -61,6 +66,13 @@ public class clienteSQL extends SQLHelper {
 
         db.close();
     }
+    public void deleteAll()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(tbl_psm_cliente.name, null, null);
+
+        db.close();
+    }
     public cliente getCliente(int idCliente)
     {
         cliente Cliente = null;
@@ -71,12 +83,21 @@ public class clienteSQL extends SQLHelper {
         Cursor cursor = db.query(tbl_psm_cliente.name, null, where, null, null, null, null);
         if(cursor.moveToFirst())
         {
+            cliente clienteLocal = new cliente();
 
-            String name = cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.razonSocial));
-            String domicilio = cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.direccion));
+            clienteLocal.setId(cursor.getInt(cursor.getColumnIndex(tbl_psm_cliente.column.name.idCliente)));
+            clienteLocal.setRfc(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.rfc)));
+            clienteLocal.setNombre(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.razonSocial)));
+            clienteLocal.setDomicilio(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.direccion)));
+            clienteLocal.setEstadoActual(estado_cliente.sinConfirmar);
+            clienteLocal.setTelefono(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.telefono)));
+            float Latitude = cursor.getFloat(cursor.getColumnIndex(tbl_psm_cliente.column.name.latitude));
+            float Longitude = cursor.getFloat(cursor.getColumnIndex(tbl_psm_cliente.column.name.longitude));
+            LatLng coordenada = new LatLng(Latitude, Longitude);
+            clienteLocal.setCoordenada(coordenada);
             //String estadoCliente = cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.estadoCliente));
 
-            Cliente = new cliente(name, domicilio, estado_cliente.sinConfirmar);
+
             cursor.close();
         }
         db.close();
@@ -95,12 +116,19 @@ public class clienteSQL extends SQLHelper {
         {
             while (!cursor.isAfterLast())
             {
-                int idCliente = cursor.getInt(cursor.getColumnIndex(tbl_psm_cliente.column.name.idCliente));
-                String name = cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.razonSocial));
-                String direccion = cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.direccion));
-                //String estado = cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.estadoCliente));
+                cliente clienteLocal = new cliente();
 
-                cliente clienteLocal = new cliente(name, direccion, estado_cliente.sinConfirmar);
+                clienteLocal.setId(cursor.getInt(cursor.getColumnIndex(tbl_psm_cliente.column.name.idCliente)));
+                clienteLocal.setRfc(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.rfc)));
+                clienteLocal.setNombre(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.razonSocial)));
+                clienteLocal.setDomicilio(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.direccion)));
+                clienteLocal.setEstadoActual(estado_cliente.sinConfirmar);
+                clienteLocal.setTelefono(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.telefono)));
+                float Latitude = cursor.getFloat(cursor.getColumnIndex(tbl_psm_cliente.column.name.latitude));
+                float Longitude = cursor.getFloat(cursor.getColumnIndex(tbl_psm_cliente.column.name.longitude));
+                LatLng coordenada = new LatLng(Latitude, Longitude);
+                clienteLocal.setCoordenada(coordenada);
+                //String estadoCliente = cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.estadoCliente));
 
                 Clientes.add(clienteLocal);
                 cursor.moveToNext();

@@ -3,27 +3,19 @@ package com.twicky.estebancarranza.reparto.adapters;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.twicky.estebancarranza.reparto.R;
-import com.twicky.estebancarranza.reparto.datos.custom_parameter;
-import com.twicky.estebancarranza.reparto.datos.producto;
-import com.twicky.estebancarranza.reparto.estaticos.layout;
+import com.twicky.estebancarranza.reparto.models.custom_parameter;
+import com.twicky.estebancarranza.reparto.models.producto;
 import com.twicky.estebancarranza.reparto.estaticos.list_products_options;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-
-import static com.twicky.estebancarranza.reparto.estaticos.list_products_options.restar;
-import static com.twicky.estebancarranza.reparto.estaticos.list_products_options.sumar;
 
 /**
  * Created by esteban.carranza on 12/03/2018.
@@ -122,14 +114,16 @@ implements View.OnClickListener
         holder.btnConfirmarPPC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                productos.get(position).setColor(R.color.green);
+
+                productos.get(position).setColorDefault(productos.get(position).getColorConfirmado());
                 notifyDataSetChanged();
             }
         });
         holder.btnRechazarPPC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                productos.get(position).setColor(R.color.red);
+                productos.get(position).setColorDefault(productos.get(position).getColorNoConfirmado());
+
                 notifyDataSetChanged();
             }
         });
@@ -233,9 +227,9 @@ implements View.OnClickListener
         public void asignarDatos(producto producto)
         {
             tvNombre.setText(producto.getTitulo());
-            txtTotal.setText(String.valueOf(producto.getTotal()));
+            txtTotal.setText(String.valueOf(producto.getPrecioNormal()));
             tvDescripcion.setText(producto.getDescripcion());
-            cvProducto.setBackgroundColor(producto.getColor());
+            cvProducto.setBackgroundColor(producto.getColorDefault().getColor());
         }
     }
 }

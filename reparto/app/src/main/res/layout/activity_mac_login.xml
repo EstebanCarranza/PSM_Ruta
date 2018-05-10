@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.twicky.estebancarranza.reparto.mac_login"
+    tools:context="com.twicky.estebancarranza.reparto.activities.mac_login"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="20dp"
@@ -17,7 +17,7 @@
         android:layout_height="60dp"
         android:gravity="center"
         android:orientation="horizontal"
-        tools:context="com.twicky.estebancarranza.reparto.mac_login"
+        tools:context="com.twicky.estebancarranza.reparto.activities.mac_login"
 
         >
 
@@ -73,7 +73,7 @@
         android:layout_height="76dp"
         android:paddingTop="5dp"
         android:orientation="horizontal"
-        tools:context="com.twicky.estebancarranza.reparto.mac_login">
+        tools:context="com.twicky.estebancarranza.reparto.activities.mac_login">
 
         <Button
             android:id="@+id/btnLogin"

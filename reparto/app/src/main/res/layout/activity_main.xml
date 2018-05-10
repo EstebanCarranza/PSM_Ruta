@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.twicky.estebancarranza.reparto.MainActivity"
+    tools:context="com.twicky.estebancarranza.reparto.activities.MainActivity"
     android:orientation="vertical"
     android:gravity="center"
 
@@ -18,7 +18,7 @@
         android:layout_height="98dp"
         android:gravity="center"
         android:orientation="horizontal"
-        tools:context="com.twicky.estebancarranza.reparto.MainActivity"
+        tools:context="com.twicky.estebancarranza.reparto.activities.MainActivity"
         >
 
         <ImageView

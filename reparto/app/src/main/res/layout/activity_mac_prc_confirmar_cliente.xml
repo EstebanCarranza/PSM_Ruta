@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     tools:openDrawer="start"
-    tools:context="com.twicky.estebancarranza.reparto.mac_prc_confirmarCliente">
+    tools:context="com.twicky.estebancarranza.reparto.activities.mac_prc_confirmarCliente">
 
 
     <ScrollView

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.twicky.estebancarranza.reparto.mac_registro"
+    tools:context="com.twicky.estebancarranza.reparto.activities.mac_registro"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="20dp"
@@ -19,7 +19,7 @@
         android:layout_height="50dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        tools:context="com.twicky.estebancarranza.reparto.mac_registro"
+        tools:context="com.twicky.estebancarranza.reparto.activities.mac_registro"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <ImageView
@@ -84,7 +84,7 @@
         android:gravity="top"
         android:orientation="horizontal"
         android:paddingTop="5dp"
-        tools:context="com.twicky.estebancarranza.reparto.MainActivity">
+        tools:context="com.twicky.estebancarranza.reparto.activities.MainActivity">
 
         <Button
             android:id="@+id/btnLogin"

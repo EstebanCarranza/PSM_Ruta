@@ -16,6 +16,7 @@ public class tbl_psm_mensaje {
             static public final String idAlmacen = "idAlmacen";
             static public final String mensaje = "mensaje";
             static public final String fechaEnvio = "fechaEnvio";
+            static public final String me = "me";
         }
     }
     static public final String create =
@@ -27,6 +28,7 @@ public class tbl_psm_mensaje {
                     column.name.idAlmacen + " integer," +
                     column.name.mensaje + " text," +
                     column.name.fechaEnvio + " text" +
+                    column.name.me + " int" +
                     "); ";
     static public final String drop = "drop table " + name + "; ";
 }

@@ -21,7 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,45 +30,45 @@
         </activity>
         <!-- REGISTRO -->
         <activity
-            android:name=".mac_registro"
-            android:parentActivityName=".MainActivity" />
+            android:name=".activities.mac_registro"
+            android:parentActivityName=".activities.MainActivity" />
         <!-- LOGIN -->
         <activity
-            android:name=".mac_login"
-            android:parentActivityName=".MainActivity" />
+            android:name=".activities.mac_login"
+            android:parentActivityName=".activities.MainActivity" />
 
         <!-- PANTALLA INICIAL HSR HOME SIN RUTA -->
         <activity
-            android:name=".mac_home_sin_ruta"
-            android:parentActivityName=".mac_login" />
+            android:name=".activities.mac_home_sin_ruta"
+            android:parentActivityName=".activities.mac_login" />
 
         <!-- PANTALLA INICIAL HCR HOME CON RUTA -->
         <activity
-            android:name=".mac_home_con_ruta"
-            android:parentActivityName=".mac_login" />
+            android:name=".activities.mac_home_con_ruta"
+            android:parentActivityName=".activities.mac_login" />
 
         <!-- HIJOS DE HSR -->
         <activity
-            android:name=".mac_primera_carga"
-            android:parentActivityName=".mac_home_sin_ruta" />
+            android:name=".activities.mac_primera_carga"
+            android:parentActivityName=".activities.mac_home_sin_ruta" />
 
         <!-- HIJOS DE PRC -->
-        <activity android:name=".mac_prc_confirmarCliente" />
-        <activity android:name=".mac_prc_productosCliente" />
+        <activity android:name=".activities.mac_prc_confirmarCliente" />
+        <activity android:name=".activities.mac_prc_productosCliente" />
 
         <!-- HIJOS DE HCR -->
         <activity
-            android:name=".mac_mensajes"
+            android:name=".activities.mac_mensajes"
             android:label="@string/title_activity_mac_mensajes"
-            android:parentActivityName=".mac_home_con_ruta" />
+            android:parentActivityName=".activities.mac_home_con_ruta" />
         <activity
-            android:name=".mac_cliente"
+            android:name=".activities.mac_cliente"
             android:label="@string/title_activity_mac_cliente"
-            android:parentActivityName=".mac_home_con_ruta" />
+            android:parentActivityName=".activities.mac_home_con_ruta" />
         <activity
-            android:name=".mac_ruta"
+            android:name=".activities.mac_ruta"
             android:label="@string/title_activity_mac_ruta"
-            android:parentActivityName=".mac_home_con_ruta" />
+            android:parentActivityName=".activities.mac_home_con_ruta" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -82,18 +82,18 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".mac_ubicacion_cliente"
+            android:name=".activities.mac_ubicacion_cliente"
             android:label="@string/title_activity_mac_ubicacion_cliente" />
         <activity
-            android:name=".mac_ubicacion"
-            android:parentActivityName=".mac_ruta" />
+            android:name=".activities.mac_ubicacion"
+            android:parentActivityName=".activities.mac_ruta" />
         <activity
-            android:name=".mac_configuracion"
-            android:parentActivityName=".mac_home_con_ruta" />
+            android:name=".activities.mac_configuracion"
+            android:parentActivityName=".activities.mac_home_con_ruta" />
         <activity
-            android:name=".mac_tema"
-            android:parentActivityName=".mac_configuracion" />
-        <activity android:name=".mac_pin" android:parentActivityName=".mac_configuracion"></activity>
+            android:name=".activities.mac_tema"
+            android:parentActivityName=".activities.mac_configuracion" />
+        <activity android:name=".activities.mac_pin" android:parentActivityName=".activities.mac_configuracion"></activity>
     </application>
 
 </manifest>

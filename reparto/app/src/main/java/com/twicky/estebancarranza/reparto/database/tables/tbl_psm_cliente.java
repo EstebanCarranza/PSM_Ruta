@@ -16,7 +16,8 @@ public class tbl_psm_cliente {
             static public final String idRegimenFiscal = "idRegimenFiscal";
             static public final String direccion = "direccion";
             static public final String telefono = "telefono";
-            static public final String coordenada = "coordenada";
+            static public final String latitude = "latitude";
+            static public final String longitude = "longitude";
             static public final String estadoCliente = "estadoCliente";
 
         }
@@ -31,7 +32,8 @@ public class tbl_psm_cliente {
                     column.name.idRegimenFiscal + " integer," +
                     column.name.direccion + " text," +
                     column.name.telefono + " text," +
-                    column.name.coordenada + " text" +
+                    column.name.latitude + " real," +
+                    column.name.longitude + " real," +
                     column.name.estadoCliente + " integer" +
                     "); ";
     static public final String drop = "drop table " + name + "; ";

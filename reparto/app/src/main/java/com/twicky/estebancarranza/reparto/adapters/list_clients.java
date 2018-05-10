@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.twicky.estebancarranza.reparto.R;
-import com.twicky.estebancarranza.reparto.datos.cliente;
-import com.twicky.estebancarranza.reparto.datos.custom_parameter;
+import com.twicky.estebancarranza.reparto.models.cliente;
+import com.twicky.estebancarranza.reparto.models.custom_parameter;
 import com.twicky.estebancarranza.reparto.estaticos.estado_cliente;
 
 import java.util.ArrayList;

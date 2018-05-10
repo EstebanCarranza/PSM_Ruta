@@ -1,7 +1,6 @@
 package com.twicky.estebancarranza.reparto.adapters;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -11,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.twicky.estebancarranza.reparto.R;
-import com.twicky.estebancarranza.reparto.datos.custom_color;
-import com.twicky.estebancarranza.reparto.datos.message;
+import com.twicky.estebancarranza.reparto.models.custom_color;
+import com.twicky.estebancarranza.reparto.models.mensaje;
 
 import java.util.ArrayList;
 
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 public class list_messages extends RecyclerView.Adapter<list_messages.ViewHolderDatos> implements View.OnClickListener{
 
     private View.OnClickListener listener;
-    private ArrayList<message> messages;
+    private ArrayList<mensaje> mensajes;
     private custom_color colorMe;
     private custom_color colorOther;
 
@@ -46,10 +45,10 @@ public class list_messages extends RecyclerView.Adapter<list_messages.ViewHolder
 
     }
 
-    public list_messages(ArrayList<message> listDatos, custom_color colorMe, custom_color colorOther)
+    public list_messages(ArrayList<mensaje> listDatos, custom_color colorMe, custom_color colorOther)
     {
 
-            this.messages = listDatos;
+            this.mensajes = listDatos;
             this.colorMe = colorMe;
             this.colorOther = colorOther;
 
@@ -66,13 +65,13 @@ public class list_messages extends RecyclerView.Adapter<list_messages.ViewHolder
     public void onBindViewHolder(final list_messages.ViewHolderDatos holder, int position) {
 
 
-        holder.asignarDatos( messages.get(position));
+        holder.asignarDatos( mensajes.get(position));
 
     }
 
     @Override
     public int getItemCount() {
-        return messages.size();
+        return mensajes.size();
     }
 
     @Override
@@ -100,7 +99,7 @@ public class list_messages extends RecyclerView.Adapter<list_messages.ViewHolder
 
 
         @SuppressLint("ResourceAsColor")
-        public void asignarDatos(message msg) {
+        public void asignarDatos(mensaje msg) {
 
             tvMessagesMSG.setText(msg.getText());
 

@@ -9,6 +9,7 @@
     -->
     <color name="red">#e74c3c</color>
     <color name="green">#2ecc71</color>
+    <color name="greenDark">#006400</color>
     <color name="background_color">#fdfefe</color>
     <color name="text_color">#454545</color>
     <color name="text_color2">#9D9D9D</color>
