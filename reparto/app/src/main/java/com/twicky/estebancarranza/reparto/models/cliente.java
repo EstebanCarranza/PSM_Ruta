@@ -102,4 +102,20 @@ public class cliente {
     public void setCoordenada(LatLng coordenada) {
         this.coordenada = coordenada;
     }
+
+
+    public boolean validateAllDataNoID()
+    {
+
+        if(
+                !this.getNombre().isEmpty() &&
+                !this.getDomicilio().isEmpty() &&
+                !this.getRfc().isEmpty() &&
+                !this.getTelefono().isEmpty() &&
+                this.getCoordenada() != null
+            )
+            return true;
+        else
+            return false;
+    }
 }

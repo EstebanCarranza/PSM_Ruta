@@ -93,7 +93,11 @@
         <activity
             android:name=".activities.mac_tema"
             android:parentActivityName=".activities.mac_configuracion" />
-        <activity android:name=".activities.mac_pin" android:parentActivityName=".activities.mac_configuracion"></activity>
+        <activity
+            android:name=".activities.mac_pin"
+            android:parentActivityName=".activities.mac_configuracion" />
+        <activity android:name=".activities.mac_test_and_other_things" />
+        <activity android:name=".activities.frg_getUbicacionCliente"></activity>
     </application>
 
 </manifest>

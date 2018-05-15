@@ -61,6 +61,8 @@ public class defaultData {
         for(int i= 0; i < cliente.size(); i++)
             db.insert(cliente.get(i));
 
+        Toast.makeText(context, "Se crearon correctamente los productos default", Toast.LENGTH_SHORT).show();
+
     }
     static public void InsertProductos(Context context, custom_color colorConfirmado, custom_color colorNoConfirmado)
     {
@@ -93,5 +95,6 @@ public class defaultData {
         for(int i = 0; i < producto.size(); i++)
             db.insert(producto.get(i));
 
+        Toast.makeText(context, "Se crearon correctamente los productos default", Toast.LENGTH_SHORT).show();
     }
 }

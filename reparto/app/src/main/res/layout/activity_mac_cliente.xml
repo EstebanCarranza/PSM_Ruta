@@ -72,24 +72,7 @@
                 android:inputType="textAutoCorrect|textAutoComplete"
                 android:textColorHint="@color/text_colorHint" />
 
-            <TextView
-                android:id="@+id/lblRegimenFiscal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="3sp"
-                android:text="@string/strRegimenFiscalCRU"
-                android:textSize="18sp" />
 
-            <Spinner
-                android:id="@+id/cbxRegimenFiscal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/background_color"
-                android:padding="10sp"
-                android:popupBackground="@color/background_color"
-                android:spinnerMode="dialog"
-                android:text="@color/background_color"
-                android:textColor="@color/background_color" />
 
             <TextView
                 android:id="@+id/lblDireccionClienteCRU"
@@ -126,6 +109,88 @@
 
 
 
+            <TextView
+                android:id="@+id/lblRegimenFiscal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3sp"
+                android:text="@string/strRegimenFiscalCRU"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/cbxRegimenFiscal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_color"
+                android:padding="10sp"
+                android:popupBackground="@color/background_color"
+                android:text="@color/background_color"
+                android:textColor="@color/background_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/lblLatitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Latitude"
+                        android:text="Latitude" />
+
+                    <TextView
+                        android:id="@+id/lblLongitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Longitude"
+                        android:text="Longitude" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/txtLatitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:editable="false"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:hint="Longitud"
+                        android:inputType="numberDecimal"
+                        android:textColorHint="@color/text_colorHint" />
+
+                    <EditText
+                        android:id="@+id/txtLongitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:editable="false"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:hint="Longitude"
+                        android:inputType="numberDecimal"
+                        android:textColorHint="@color/text_colorHint" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnAbrirMapa"
+                android:textColor="@color/text_colorBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Abrir mapa para obtener ubicación" />
 
 
         </LinearLayout>
