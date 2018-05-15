@@ -9,10 +9,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 import com.twicky.estebancarranza.reparto.R;
 import com.twicky.estebancarranza.reparto.database.helpers.productoSQL;
 import com.twicky.estebancarranza.reparto.estaticos.defaultData;
 import com.twicky.estebancarranza.reparto.models.custom_color;
+import com.twicky.estebancarranza.reparto.webservice.NetCallback;
+import com.twicky.estebancarranza.reparto.webservice.networking;
 
 public class mac_test_and_other_things extends AppCompatActivity  {
 
@@ -34,6 +37,7 @@ public class mac_test_and_other_things extends AppCompatActivity  {
 
         btnBorrarProductos = (Button) findViewById(R.id.btnBorrarProductos);
         btnBorrarClientes = (Button) findViewById(R.id.btnBorrarClientes);
+        btnBorrarRutas = (Button) findViewById(R.id.btnBorrarRutas);
 
         btnBorrarProductos.setOnClickListener(new View.OnClickListener() {
                  @Override
@@ -57,6 +61,30 @@ public class mac_test_and_other_things extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent (mac_test_and_other_things.this, mac_cliente.class));
+            }
+        });
+
+
+        btnBorrarRutas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new networking(mac_test_and_other_things.this).execute("getAddress", new LatLng(25.725563,-100.3153316), new NetCallback() {
+                    @Override
+                    public void onWorkFinish(Object data) {
+                        final String address = (String) data;
+
+                        // Es imposible modificar directamente cualquier vista del activity fuera del hilo principal donde
+                        // estas se ejecutan (El hilo de UI). Por tal razon es necesario hacer uso del metodo "runOnUithread"
+                        // para "forzar" a correr el bloque de codigo dentro del hilo de la UI
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Todoo el codigo dentro de este metodo se ejecuta dentro del hilo principal o hilo de la UI
+                                Toast.makeText(mac_test_and_other_things.this, address, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
             }
         });
 

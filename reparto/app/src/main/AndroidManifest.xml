@@ -79,7 +79,9 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyBgq1EU6PKHIVpX8p2CBy-NA2G6Ngrjku4" />
+            <!--android:value="@string/google_maps_key" />-->
+
 
         <activity
             android:name=".activities.mac_ubicacion_cliente"

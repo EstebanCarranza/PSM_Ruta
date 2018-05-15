@@ -260,4 +260,11 @@ public class frg_getUbicacionCliente extends FragmentActivity implements OnMapRe
         // Muestra una linea en el mapa
         mMap.addPolyline(line);
     }
+
+    private String getAddress()
+    {
+        return "";
+    }
+
+
 }
