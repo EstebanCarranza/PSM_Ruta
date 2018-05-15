@@ -1,0 +1,5 @@
+Pack: package com.twicky.estebancarranza.reparto.webservice;
+Archivo: getAddressWithLatLng.java
+Métdodo: public static String getAddress() {}
+
+Cuando llega al try la variable jsonResponse ya tiene el string con los datos del servidor el problema es parsear a un string normal
