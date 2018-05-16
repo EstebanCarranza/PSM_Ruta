@@ -111,4 +111,11 @@
         android:ems="10"
         android:hint="Longitud"
         android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnHASH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="hasheame" />
 </LinearLayout>

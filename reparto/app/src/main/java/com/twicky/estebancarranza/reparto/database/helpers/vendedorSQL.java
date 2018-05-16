@@ -11,6 +11,8 @@ import com.twicky.estebancarranza.reparto.models.vendedor;
 
 import java.util.ArrayList;
 
+import static com.twicky.estebancarranza.reparto.util.encrypt.md5;
+
 /**
  * Created by esteban.carranza on 10/05/2018.
  */
@@ -30,6 +32,7 @@ public class vendedorSQL extends SQLHelper{
         values.put(tbl_psm_vendedor.column.name.appat, vendedor.getAppat());
         values.put(tbl_psm_vendedor.column.name.apmat, vendedor.getApmat());
         values.put(tbl_psm_vendedor.column.name.fechNac, vendedor.getFechNac());
+        values.put(tbl_psm_vendedor.column.name.loginActive, vendedor.getLoginActive());
 
         SQLiteDatabase db = getWritableDatabase();
 
@@ -51,6 +54,7 @@ public class vendedorSQL extends SQLHelper{
         values.put(tbl_psm_vendedor.column.name.appat, vendedor.getAppat());
         values.put(tbl_psm_vendedor.column.name.apmat, vendedor.getApmat());
         values.put(tbl_psm_vendedor.column.name.fechNac, vendedor.getFechNac());
+        values.put(tbl_psm_vendedor.column.name.loginActive, vendedor.getLoginActive());
 
         SQLiteDatabase db = getWritableDatabase();
 
@@ -88,6 +92,7 @@ public class vendedorSQL extends SQLHelper{
             vendedor.setAppat(cursor.getString(cursor.getColumnIndex(tbl_psm_vendedor.column.name.appat)));
             vendedor.setApmat(cursor.getString(cursor.getColumnIndex(tbl_psm_vendedor.column.name.apmat)));
             vendedor.setFechNac(cursor.getString(cursor.getColumnIndex(tbl_psm_vendedor.column.name.fechNac)));
+            vendedor.setLoginActive(cursor.getInt(cursor.getColumnIndex(tbl_psm_vendedor.column.name.loginActive)));
 
 
             cursor.close();
@@ -105,7 +110,8 @@ public class vendedorSQL extends SQLHelper{
         SQLiteDatabase db = getReadableDatabase();
         String where =
                 tbl_psm_vendedor.column.name.correo + " = '" + correo + "' AND " +
-                tbl_psm_vendedor.column.name.contrasenia + " = '" + contrasenia + "'";
+                tbl_psm_vendedor.column.name.contrasenia + " = '" + md5(contrasenia) + "' AND " +
+                tbl_psm_vendedor.column.name.loginActive + " =  1";
 
         Cursor cursor = db.query(tbl_psm_vendedor.name, null, where, null, null, null, null);
         if(cursor.moveToFirst())
@@ -120,7 +126,7 @@ public class vendedorSQL extends SQLHelper{
             vendedor.setAppat(cursor.getString(cursor.getColumnIndex(tbl_psm_vendedor.column.name.appat)));
             vendedor.setApmat(cursor.getString(cursor.getColumnIndex(tbl_psm_vendedor.column.name.apmat)));
             vendedor.setFechNac(cursor.getString(cursor.getColumnIndex(tbl_psm_vendedor.column.name.fechNac)));
-
+            vendedor.setLoginActive(cursor.getInt(cursor.getColumnIndex(tbl_psm_vendedor.column.name.loginActive)));
 
             cursor.close();
         }
@@ -150,6 +156,7 @@ public class vendedorSQL extends SQLHelper{
                 vendedor.setAppat(cursor.getString(cursor.getColumnIndex(tbl_psm_vendedor.column.name.appat)));
                 vendedor.setApmat(cursor.getString(cursor.getColumnIndex(tbl_psm_vendedor.column.name.apmat)));
                 vendedor.setFechNac(cursor.getString(cursor.getColumnIndex(tbl_psm_vendedor.column.name.fechNac)));
+                vendedor.setLoginActive(cursor.getInt(cursor.getColumnIndex(tbl_psm_vendedor.column.name.loginActive)));
 
                 vendedores.add(vendedor);
                 cursor.moveToNext();

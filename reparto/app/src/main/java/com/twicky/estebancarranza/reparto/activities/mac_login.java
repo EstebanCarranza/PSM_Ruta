@@ -1,6 +1,8 @@
 package com.twicky.estebancarranza.reparto.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,11 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.twicky.estebancarranza.reparto.R;
 import com.twicky.estebancarranza.reparto.database.helpers.vendedorSQL;
 import com.twicky.estebancarranza.reparto.estaticos.defaultData;
 import com.twicky.estebancarranza.reparto.models.custom_color;
 import com.twicky.estebancarranza.reparto.models.vendedor;
+import com.twicky.estebancarranza.reparto.webservice.NetCallback;
+import com.twicky.estebancarranza.reparto.webservice.networking;
 
 import java.util.ArrayList;
 
@@ -30,6 +35,78 @@ public class mac_login extends AppCompatActivity {
     Button btnLogin;
     Button btnLoginFacebook;
 
+    private void remoteLogin()
+    {
+        String correo = txtCorreo.getText().toString();
+        String contrasenia = txtContrasenia.getText().toString();
+
+        new networking(mac_login.this, new NetCallback() {
+            @Override
+            public void onWorkFinish(Object data) {
+                final vendedor result = (vendedor) data;
+
+                // Es imposible modificar directamente cualquier vista del activity fuera del hilo principal donde
+                // estas se ejecutan (El hilo de UI). Por tal razon es necesario hacer uso del metodo "runOnUithread"
+                // para "forzar" a correr el bloque de codigo dentro del hilo de la UI
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Todoo el codigo dentro de este metodo se ejecuta dentro del hilo principal o hilo de la UI
+                        if(result != null)
+                        {
+                            Toast.makeText(mac_login.this, "Iniciaste sesión correctamente", Toast.LENGTH_SHORT).show();
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mac_login.this);
+
+                            builder.setTitle("Iniciar sesión");
+                            builder.setMessage("¿Quieres guardar el inicio de sesión?");
+
+                            builder.setPositiveButton("Guardar sesión", new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(mac_login.this, "Sesión guardada :)", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                    vendedorSQL db = new vendedorSQL(getApplicationContext());
+                                    vendedor vendedor = new vendedor();
+                                    vendedor = result;
+                                    vendedor.setLoginActive(1);
+                                    db.insert(vendedor);
+                                }
+                            });
+
+                            builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    Toast.makeText(mac_login.this, "Sesion no guardada, la proxima vez tendrás que iniciar sesión", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            AlertDialog alert = builder.create();
+                            alert.show();
+
+
+                        }
+                        else
+                        {
+                            Toast.makeText(mac_login.this, "No estás registrado :(", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        }).execute("RemoteLogin", correo, contrasenia);
+    }
+    private vendedor localLogin()
+    {
+        vendedorSQL db = new vendedorSQL(getApplicationContext());
+        vendedor vendedor =db.validarInicioSesion(txtCorreo.getText().toString(), txtContrasenia.getText().toString());
+
+        return vendedor;
+
+    }
+
     private void Login()
     {
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -40,8 +117,11 @@ public class mac_login extends AppCompatActivity {
 
             if(txtCorreo.getText().toString().isEmpty())
                 Toast.makeText(mac_login.this, "Escribe tu correo o contraseña", Toast.LENGTH_SHORT).show();
-            else
-                switch(txtCorreo.getText().toString()) {
+            else {
+
+
+              {
+                switch (txtCorreo.getText().toString()) {
                     case "sin@ruta": {
                         Intent intent = new Intent(mac_login.this, mac_home_sin_ruta.class);
                         startActivity(intent);
@@ -53,9 +133,18 @@ public class mac_login extends AppCompatActivity {
                     }
                     break;
                     default:
-                        Toast.makeText(mac_login.this, "Comando no reconocido", Toast.LENGTH_SHORT).show();
-                        break;
+                       vendedor vendedor = localLogin();
+                        if(vendedor != null)
+                           remoteLogin();
+                        else
+                            Toast.makeText(mac_login.this, "Inicio se sesión local", Toast.LENGTH_SHORT).show();
+                    break;
                 }
+            }
+
+
+            }
+
             }
         });
 

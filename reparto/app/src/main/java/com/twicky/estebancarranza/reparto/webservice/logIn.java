@@ -3,6 +3,7 @@ package com.twicky.estebancarranza.reparto.webservice;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.twicky.estebancarranza.reparto.models.vendedor;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,6 +16,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static com.twicky.estebancarranza.reparto.util.encrypt.md5;
 import static com.twicky.estebancarranza.reparto.webservice.networking.inputStreamToString;
 import static com.twicky.estebancarranza.reparto.webservice.staticData.SERVER_PATH_LOGIN;
 import static com.twicky.estebancarranza.reparto.webservice.staticData.TIMEOUT;
@@ -24,10 +26,11 @@ import static com.twicky.estebancarranza.reparto.webservice.staticData.TIMEOUT;
  */
 
 public class logIn {
-    public String validateLogin(String user, String password) {
-        String address = "";
-        String postParams = "&user=" + user + "&pass=" + password;
+    public static vendedor validateLogin(String correo, String contrasenia) {
+        String login = "";
+        String postParams = "&correo=" + correo + "&contrasenia=" + md5(contrasenia);
         String response = "";
+        vendedor vendedor = new vendedor();
         HttpURLConnection conn = null;
         URL url = null;
         try {
@@ -56,7 +59,16 @@ public class logIn {
                 // Convertimos nuestro JSON String a un objeto para extraer sus datos
                 JSONArray jsonArray = new JSONArray();
                 JSONObject jsonObject = new JSONObject(jsonResponse);
-                return jsonObject.optString("result");
+
+                vendedor.setIdVendedor(jsonObject.optInt("idVendedor"));
+                vendedor.setCorreo(jsonObject.getString("correo"));
+                vendedor.setNombres(jsonObject.getString("nombres"));
+                vendedor.setAppat(jsonObject.getString("appat"));
+                vendedor.setApmat(jsonObject.getString("apmat"));
+                vendedor.setFechNac(jsonObject.getString("fechNac"));
+                vendedor.setContrasenia(jsonObject.getString("contrasenia"));
+
+                return vendedor;
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -64,7 +76,7 @@ public class logIn {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "";
+        return vendedor;
     }
 
 

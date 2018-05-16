@@ -29,7 +29,7 @@ import static com.twicky.estebancarranza.reparto.webservice.staticData.TIMEOUT;
 
 public class getAddressWithLatLng {
 
-    public String getAddress(LatLng latlng) {
+    public static String getAddress(LatLng latlng) {
         String address = "";
         String postParams = "&latitude=" + latlng.latitude + "&longitude=" + latlng.longitude;
         String response = "";

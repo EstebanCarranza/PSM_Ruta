@@ -18,6 +18,7 @@ public class tbl_psm_vendedor {
                 static public final String appat        = "appat";
                 static public final String apmat        = "apmat";
                 static public final String fechNac      = "fechNac";
+                static public final String loginActive  = "loginActive";
             }
 
         }
@@ -30,7 +31,8 @@ public class tbl_psm_vendedor {
                         column.name.nombres + " text," +
                         column.name.appat + " text," +
                         column.name.apmat + " text," +
-                        column.name.fechNac + " text" +
+                        column.name.fechNac + " text," +
+                        column.name.loginActive + " text" +
                         "); ";
         static public final String drop = "drop table " + name + "; ";
 

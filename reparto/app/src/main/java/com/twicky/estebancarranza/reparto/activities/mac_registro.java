@@ -10,6 +10,7 @@ import com.twicky.estebancarranza.reparto.R;
 
 public class mac_registro extends AppCompatActivity {
 
+
     Button btnLoginFacebook;
 
     @Override
@@ -18,6 +19,7 @@ public class mac_registro extends AppCompatActivity {
         setContentView(R.layout.activity_mac_registro);
 
         btnLoginFacebook = (Button) findViewById(R.id.btnLoginFacebook);
+
 
         btnLoginFacebook.setOnClickListener(new View.OnClickListener() {
             @Override

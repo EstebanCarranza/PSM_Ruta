@@ -4,11 +4,15 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.twicky.estebancarranza.reparto.models.vendedor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import static com.twicky.estebancarranza.reparto.webservice.getAddressWithLatLng.getAddress;
+import static com.twicky.estebancarranza.reparto.webservice.logIn.validateLogin;
 
 /**
  * Created by esteban.carranza on 15/05/2018.
@@ -37,13 +41,20 @@ private  NetCallback mListenerNetCall;
         String action = (String) objects[0];
         if(action.equals("getAddress")) {
             // Llamamos a nuestro callback
-            getAddressWithLatLng getAd = new getAddressWithLatLng();
 
-            String address = getAd.getAddress((LatLng)objects[1]);
+            String address = getAddress((LatLng)objects[1]);
             if(mListenerNetCall != null)
             {
                // NetCallback netCallback = (NetCallback) objects[0];
                 mListenerNetCall.onWorkFinish(address);
+            }
+        }else if(action.equals("RemoteLogin"))
+        {
+            vendedor login = validateLogin((String) objects[1], (String) objects[2]);
+            if(mListenerNetCall != null)
+            {
+                // NetCallback netCallback = (NetCallback) objects[0];
+                mListenerNetCall.onWorkFinish(login);
             }
         }
         return null;

@@ -20,6 +20,8 @@ import com.twicky.estebancarranza.reparto.webservice.networking;
 
 import org.w3c.dom.Text;
 
+import static com.twicky.estebancarranza.reparto.util.encrypt.md5;
+
 public class mac_test_and_other_things extends AppCompatActivity  {
 
     Button btnCrearClientes;
@@ -33,6 +35,7 @@ public class mac_test_and_other_things extends AppCompatActivity  {
     TextView txtLatitude;
     TextView txtLongitude;
 
+    Button btnHASH;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class mac_test_and_other_things extends AppCompatActivity  {
         btnBorrarRutas = (Button) findViewById(R.id.btnBorrarRutas);
         txtLatitude = (TextView) findViewById(R.id.txtLatitude);
         txtLongitude = (TextView) findViewById(R.id.txtLongitude);
+        btnHASH = (Button) findViewById(R.id.btnHASH);
 
         btnBorrarProductos.setOnClickListener(new View.OnClickListener() {
                  @Override
@@ -100,6 +104,15 @@ public class mac_test_and_other_things extends AppCompatActivity  {
                 }).execute("getAddress", new LatLng(latitude, longitude));
             }
         });
+
+        btnHASH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String crypt = md5(txtLongitude.getText().toString());
+                Toast.makeText(mac_test_and_other_things.this, crypt, Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 

@@ -13,6 +13,18 @@ public class vendedor {
     private String apmat;
     private String fechNac;
 
+    public int getLoginActive() {
+        return LoginActive;
+    }
+
+    public void setLoginActive(int loginActive) {
+        LoginActive = loginActive;
+    }
+
+    private int LoginActive;
+
+
+
     public vendedor() {
     }
 
