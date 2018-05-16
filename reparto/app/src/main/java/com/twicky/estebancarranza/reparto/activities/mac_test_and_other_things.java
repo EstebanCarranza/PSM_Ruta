@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -17,6 +18,8 @@ import com.twicky.estebancarranza.reparto.models.custom_color;
 import com.twicky.estebancarranza.reparto.webservice.NetCallback;
 import com.twicky.estebancarranza.reparto.webservice.networking;
 
+import org.w3c.dom.Text;
+
 public class mac_test_and_other_things extends AppCompatActivity  {
 
     Button btnCrearClientes;
@@ -26,6 +29,9 @@ public class mac_test_and_other_things extends AppCompatActivity  {
     Button btnBorrarClientes; //resetea los valores default
     Button btnBorrarProductos; //resetea los valores default
     Button btnBorrarRutas;
+
+    TextView txtLatitude;
+    TextView txtLongitude;
 
 
     @Override
@@ -38,6 +44,8 @@ public class mac_test_and_other_things extends AppCompatActivity  {
         btnBorrarProductos = (Button) findViewById(R.id.btnBorrarProductos);
         btnBorrarClientes = (Button) findViewById(R.id.btnBorrarClientes);
         btnBorrarRutas = (Button) findViewById(R.id.btnBorrarRutas);
+        txtLatitude = (TextView) findViewById(R.id.txtLatitude);
+        txtLongitude = (TextView) findViewById(R.id.txtLongitude);
 
         btnBorrarProductos.setOnClickListener(new View.OnClickListener() {
                  @Override
@@ -68,7 +76,12 @@ public class mac_test_and_other_things extends AppCompatActivity  {
         btnBorrarRutas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new networking(mac_test_and_other_things.this).execute("getAddress", new LatLng(25.725563,-100.3153316), new NetCallback() {
+
+            Double latitude = Double.parseDouble(txtLatitude.getText().toString());
+            Double longitude = Double.parseDouble(txtLongitude.getText().toString());
+
+
+                new networking(mac_test_and_other_things.this, new NetCallback() {
                     @Override
                     public void onWorkFinish(Object data) {
                         final String address = (String) data;
@@ -84,7 +97,7 @@ public class mac_test_and_other_things extends AppCompatActivity  {
                             }
                         });
                     }
-                });
+                }).execute("getAddress", new LatLng(latitude, longitude));
             }
         });
 

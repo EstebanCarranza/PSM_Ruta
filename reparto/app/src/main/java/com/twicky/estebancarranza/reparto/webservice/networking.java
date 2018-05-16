@@ -2,26 +2,13 @@ package com.twicky.estebancarranza.reparto.webservice;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import com.twicky.estebancarranza.reparto.util.JSONConverts;
+import com.google.android.gms.maps.model.LatLng;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import static com.twicky.estebancarranza.reparto.webservice.getAddressWithLatLng.getAddress;
-import static com.twicky.estebancarranza.reparto.webservice.staticData.SERVER_PATH;
-import static com.twicky.estebancarranza.reparto.webservice.staticData.TIMEOUT;
 
 /**
  * Created by esteban.carranza on 15/05/2018.
@@ -29,9 +16,10 @@ import static com.twicky.estebancarranza.reparto.webservice.staticData.TIMEOUT;
 
 public class networking extends AsyncTask<Object, Integer, Object> {
 Context m_context;
-
-    public networking(Context m_context) {
+private  NetCallback mListenerNetCall;
+    public networking(Context m_context,NetCallback mListenerNetCall) {
         this.m_context = m_context;
+        this.mListenerNetCall = mListenerNetCall;
     }
 
     @Override
@@ -49,9 +37,14 @@ Context m_context;
         String action = (String) objects[0];
         if(action.equals("getAddress")) {
             // Llamamos a nuestro callback
-            String address = getAddress();
-            NetCallback netCallback = (NetCallback) objects[1];
-            netCallback.onWorkFinish(address);
+            getAddressWithLatLng getAd = new getAddressWithLatLng();
+
+            String address = getAd.getAddress((LatLng)objects[1]);
+            if(mListenerNetCall != null)
+            {
+               // NetCallback netCallback = (NetCallback) objects[0];
+                mListenerNetCall.onWorkFinish(address);
+            }
         }
         return null;
     }

@@ -20,6 +20,8 @@ import com.twicky.estebancarranza.reparto.database.helpers.clienteSQL;
 import com.twicky.estebancarranza.reparto.models.cliente;
 import com.twicky.estebancarranza.reparto.models.regimenFiscal;
 import com.twicky.estebancarranza.reparto.estaticos.estado_cliente;
+import com.twicky.estebancarranza.reparto.webservice.NetCallback;
+import com.twicky.estebancarranza.reparto.webservice.networking;
 
 import java.util.ArrayList;
 
@@ -56,6 +58,29 @@ public class mac_cliente extends AppCompatActivity {//implements OnMapReadyCallb
 
                 txtLatitude.setText(String.valueOf(latitudeX));
                 txtLongitude.setText(String.valueOf(longitudeX));
+
+                Double latitude = Double.parseDouble(txtLatitude.getText().toString());
+                Double longitude = Double.parseDouble(txtLongitude.getText().toString());
+
+
+                new networking(mac_cliente.this, new NetCallback() {
+                    @Override
+                    public void onWorkFinish(Object data) {
+                        final String address = (String) data;
+
+                        // Es imposible modificar directamente cualquier vista del activity fuera del hilo principal donde
+                        // estas se ejecutan (El hilo de UI). Por tal razon es necesario hacer uso del metodo "runOnUithread"
+                        // para "forzar" a correr el bloque de codigo dentro del hilo de la UI
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Todoo el codigo dentro de este metodo se ejecuta dentro del hilo principal o hilo de la UI
+                                //Toast.makeText(mac_cliente.this, address, Toast.LENGTH_SHORT).show();
+                                txtDireccionClienteCRU.setText(address);
+                            }
+                        });
+                    }
+                }).execute("getAddress", new LatLng(latitude, longitude));
 
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -178,12 +203,28 @@ public class mac_cliente extends AppCompatActivity {//implements OnMapReadyCallb
 
         listRegimenFiscal = new ArrayList<>();
 
-        listRegimenFiscal.add(new regimenFiscal(1, "General de personas fisicas"));
-        listRegimenFiscal.add(new regimenFiscal(2, "General de personas morales"));
-        listRegimenFiscal.add(new regimenFiscal(3, "General 3"));
-        listRegimenFiscal.add(new regimenFiscal(4, "General 4"));
-        listRegimenFiscal.add(new regimenFiscal(5, "General 5"));
-        listRegimenFiscal.add(new regimenFiscal(6, "General 6"));
+        listRegimenFiscal.add(new regimenFiscal(1, "General de Ley Personas Morales"));
+        listRegimenFiscal.add(new regimenFiscal(2, "Personas Morales con Fines no Lucrativos"));
+        listRegimenFiscal.add(new regimenFiscal(3, "Sueldos y Salarios e Ingresos Asimilados a Salarios"));
+        listRegimenFiscal.add(new regimenFiscal(4, "Arrendamiento"));
+        listRegimenFiscal.add(new regimenFiscal(5, "Demás ingresos"));
+        listRegimenFiscal.add(new regimenFiscal(6, "Consolidación"));
+        listRegimenFiscal.add(new regimenFiscal(7, "Residentes en el Extranjero sin Establecimiento Permanente en México"));
+        listRegimenFiscal.add(new regimenFiscal(8, "Ingresos por Dividendos (socios y accionistas)"));
+        listRegimenFiscal.add(new regimenFiscal(9, "Personas Físicas con Actividades Empresariales y Profesionales"));
+        listRegimenFiscal.add(new regimenFiscal(10, "Ingresos por intereses"));
+        listRegimenFiscal.add(new regimenFiscal(11, "Sin obligaciones fiscales"));
+        listRegimenFiscal.add(new regimenFiscal(12, "Sociedades Cooperativas de Producción que optan por diferir sus ingresos"));
+        listRegimenFiscal.add(new regimenFiscal(13, "Incorporación Fiscal"));
+        listRegimenFiscal.add(new regimenFiscal(14, "Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras"));
+        listRegimenFiscal.add(new regimenFiscal(15, "Opcional para Grupos de Sociedades"));
+        listRegimenFiscal.add(new regimenFiscal(16, "Coordinados"));
+        listRegimenFiscal.add(new regimenFiscal(17, "Hidrocarburos"));
+        listRegimenFiscal.add(new regimenFiscal(18, "Régimen de Enajenación o Adquisición de Bienes"));
+        listRegimenFiscal.add(new regimenFiscal(19, "De los Regímenes Fiscales Preferentes y de las Empresas Multinacionales"));
+        listRegimenFiscal.add(new regimenFiscal(20, "Enajenación de acciones en bolsa de valores"));
+        listRegimenFiscal.add(new regimenFiscal(21, "Régimen de los ingresos por obtención de premios"));
+
 
         ArrayList<String> listaNombresRF = new ArrayList<>();
 

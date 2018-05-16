@@ -3,10 +3,6 @@ package com.twicky.estebancarranza.reparto.webservice;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,23 +16,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import static com.twicky.estebancarranza.reparto.webservice.networking.inputStreamToString;
-import static com.twicky.estebancarranza.reparto.webservice.staticData.SERVER_PATH_GET_ADDRESS;
+import static com.twicky.estebancarranza.reparto.webservice.staticData.SERVER_PATH_LOGIN;
 import static com.twicky.estebancarranza.reparto.webservice.staticData.TIMEOUT;
 
 /**
  * Created by esteban.carranza on 15/05/2018.
  */
 
-public class getAddressWithLatLng {
-
-    public String getAddress(LatLng latlng) {
+public class logIn {
+    public String validateLogin(String user, String password) {
         String address = "";
-        String postParams = "&latitude=" + latlng.latitude + "&longitude=" + latlng.longitude;
+        String postParams = "&user=" + user + "&pass=" + password;
         String response = "";
         HttpURLConnection conn = null;
         URL url = null;
         try {
-            url = new URL(SERVER_PATH_GET_ADDRESS);
+            url = new URL(SERVER_PATH_LOGIN);
             conn = (HttpURLConnection) url.openConnection();
             conn.setDoInput(true);
             conn.setDoOutput(true);
@@ -61,7 +56,7 @@ public class getAddressWithLatLng {
                 // Convertimos nuestro JSON String a un objeto para extraer sus datos
                 JSONArray jsonArray = new JSONArray();
                 JSONObject jsonObject = new JSONObject(jsonResponse);
-                return jsonObject.optString("address");
+                return jsonObject.optString("result");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -71,4 +66,6 @@ public class getAddressWithLatLng {
         }
         return "";
     }
+
+
 }

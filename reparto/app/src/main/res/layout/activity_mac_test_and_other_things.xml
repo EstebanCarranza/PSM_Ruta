@@ -93,4 +93,22 @@
             android:layout_weight="1"
             android:text="=v" />
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/txtLatitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:ems="10"
+        android:hint="Latitude"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtLongitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:ems="10"
+        android:hint="Longitud"
+        android:inputType="textPersonName" />
 </LinearLayout>
