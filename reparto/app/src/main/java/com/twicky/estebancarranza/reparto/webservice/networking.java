@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.twicky.estebancarranza.reparto.models.cliente;
 import com.twicky.estebancarranza.reparto.models.vendedor;
 
 import java.io.BufferedReader;
@@ -56,7 +57,15 @@ private  NetCallback mListenerNetCall;
                 // NetCallback netCallback = (NetCallback) objects[0];
                 mListenerNetCall.onWorkFinish(login);
             }
+        }else if(action.equals("SynchronizeClient"))
+        {
+            String SynchronizeClient = synchronizeClients.SynchronizeClient((cliente) objects[1]);
+            if(mListenerNetCall != null)
+            {
+                mListenerNetCall.onWorkFinish(SynchronizeClient);
+            }
         }
+
         return null;
     }
 

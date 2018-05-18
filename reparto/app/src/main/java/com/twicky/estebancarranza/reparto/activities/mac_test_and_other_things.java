@@ -14,6 +14,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.twicky.estebancarranza.reparto.R;
 import com.twicky.estebancarranza.reparto.database.helpers.productoSQL;
 import com.twicky.estebancarranza.reparto.estaticos.defaultData;
+import com.twicky.estebancarranza.reparto.estaticos.estado_cliente;
+import com.twicky.estebancarranza.reparto.models.cliente;
 import com.twicky.estebancarranza.reparto.models.custom_color;
 import com.twicky.estebancarranza.reparto.webservice.NetCallback;
 import com.twicky.estebancarranza.reparto.webservice.networking;
@@ -36,6 +38,7 @@ public class mac_test_and_other_things extends AppCompatActivity  {
     TextView txtLongitude;
 
     Button btnHASH;
+    Button btnSincronizar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class mac_test_and_other_things extends AppCompatActivity  {
         txtLatitude = (TextView) findViewById(R.id.txtLatitude);
         txtLongitude = (TextView) findViewById(R.id.txtLongitude);
         btnHASH = (Button) findViewById(R.id.btnHASH);
+        btnSincronizar = (Button) findViewById(R.id.btnSincronizar);
 
         btnBorrarProductos.setOnClickListener(new View.OnClickListener() {
                  @Override
@@ -113,6 +117,39 @@ public class mac_test_and_other_things extends AppCompatActivity  {
             }
         });
 
+        final cliente cliente = new cliente();
+        cliente.setId(1);
+        cliente.setRfc("HOLA");
+        cliente.setNombre("NOMBRE");
+        cliente.setIdRegimenFiscal(1);
+        cliente.setDomicilio("DOMICILIO");
+        cliente.setTelefono("TELEFONO");
+        cliente.setCoordenada(new LatLng(10, 10));
+        cliente.setEstadoActual(estado_cliente.sinConfirmar);
+
+
+        btnSincronizar.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View view) {
+                new networking(mac_test_and_other_things.this, new NetCallback() {
+
+                    @Override
+                    public void onWorkFinish(Object data) {
+                        final String response = (String) data;
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Todoo el codigo dentro de este metodo se ejecuta dentro del hilo principal o hilo de la UI
+                                Toast.makeText(mac_test_and_other_things.this, response, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).execute("SynchronizeClient", cliente);
+            }
+        });
 
     }
 

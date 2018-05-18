@@ -2,6 +2,11 @@ package com.twicky.estebancarranza.reparto.webservice;
 
 import android.util.Log;
 
+import com.twicky.estebancarranza.reparto.models.cliente;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -11,7 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import static com.twicky.estebancarranza.reparto.webservice.networking.inputStreamToString;
-import static com.twicky.estebancarranza.reparto.webservice.staticData.SERVER_PATH;
+import static com.twicky.estebancarranza.reparto.webservice.staticData.SERRVER_PATH_SYNCHRONIZE_CLIENTS;
 import static com.twicky.estebancarranza.reparto.webservice.staticData.TIMEOUT;
 
 /**
@@ -20,14 +25,38 @@ import static com.twicky.estebancarranza.reparto.webservice.staticData.TIMEOUT;
 
 public class synchronizeClients {
 
-    public String synchronize() {
-        String address = "";
-        String postParams = "";
+    public static String SynchronizeClient(cliente cliente) {
+
+        int confirmacion = -1;
+        switch(cliente.getEstadoActual())
+        {
+            case confirmado:
+               confirmacion = 0;
+            break;
+            case sinAsignar:
+                confirmacion = 1;
+                break;
+            case sinConfirmar:
+                confirmacion = 2;
+                break;
+            default: confirmacion = -1; break;
+        }
+
+        String postParams =
+                "&rfc=" + cliente.getRfc() +
+                "&razonSocial=" + cliente.getNombre() +
+                "&idRegimenFiscal=" + cliente.getIdRegimenFiscal() +
+                "&direccion=" + cliente.getDomicilio() +
+                "&telefono=" + cliente.getTelefono() +
+                "&latitude=" + cliente.getCoordenada().latitude +
+                "&longitude=" + cliente.getCoordenada().longitude +
+                "&estadoCliente=" + confirmacion
+        ;
         String response = "";
         HttpURLConnection conn = null;
         URL url = null;
         try {
-            url = new URL(SERVER_PATH);
+            url = new URL(SERRVER_PATH_SYNCHRONIZE_CLIENTS);
             conn = (HttpURLConnection) url.openConnection();
             conn.setDoInput(true);
             conn.setDoOutput(true);
@@ -44,37 +73,21 @@ public class synchronizeClients {
             Log.w("RESPONSE CODE", "" + responseCode);
 
             InputStream in = new BufferedInputStream(conn.getInputStream());
-            String jsonResponse = inputStreamToString(in);
-
+            String jsonResponse = "";
+            jsonResponse = inputStreamToString(in);
+            response = jsonResponse;
             try {
 
-                /*
+                // Convertimos nuestro JSON String a un objeto para extraer sus datos
+                JSONArray jsonArray = new JSONArray();
                 JSONObject jsonObject = new JSONObject(jsonResponse);
-                Object jsonResults = jsonObject.get("results");
-
-
-
-                //JSONArray jsonResultArray = JSONConverts.objectToJSONArray(jsonResults);
-
-
-                  JSONObject jsonResults1 = JSONConverts.objectToJSONObject(jsonResults);
-                  //jsonResults1 = jsonResultArray.getJSONObject(0);
-
-
-*/
-                int data = 0;
-                //  for (int i = 0; i < jsonArray.length(); i++) {
-                //JSONObject object = jsonArray.get("formatted_address");
-                //address = object.getString("formatted_address");
-
-                //imagesList.add(new MyImage(name, path));
-                // }
+                return jsonObject.optString("result")  + jsonObject.optString("detail");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return address;
+        return response;
     }
 }
