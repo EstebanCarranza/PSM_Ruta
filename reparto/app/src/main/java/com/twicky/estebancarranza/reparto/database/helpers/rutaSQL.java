@@ -62,6 +62,14 @@ public class rutaSQL extends SQLHelper {
 
         db.close();
     }
+    public void deleteAll()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.delete(tbl_psm_ruta.name, null, null);
+
+        db.close();
+    }
     public ruta getRuta(int idruta)
     {
         ruta ruta = null;

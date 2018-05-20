@@ -23,7 +23,9 @@ import com.twicky.estebancarranza.reparto.estaticos.estado_cliente;
 import com.twicky.estebancarranza.reparto.webservice.NetCallback;
 import com.twicky.estebancarranza.reparto.webservice.networking;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class mac_cliente extends AppCompatActivity {//implements OnMapReadyCallback {
@@ -41,6 +43,8 @@ public class mac_cliente extends AppCompatActivity {//implements OnMapReadyCallb
     LatLng latLngCliente;
     EditText txtLatitude;
     EditText txtLongitude;
+    boolean editMode = false;
+    cliente editClient;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -119,11 +123,24 @@ public class mac_cliente extends AppCompatActivity {//implements OnMapReadyCallb
         if(idCliente > 0 )
         {
             clienteSQL db = new clienteSQL(getApplicationContext());
-            cliente Cliente = db.getCliente(idCliente);
-            txtNombreClienteCRU.setText(Cliente.getNombre());
-            txtDireccionClienteCRU.setText(Cliente.getDomicilio());
-            txtTelefonoClienteCRU.setText(Cliente.getTelefono());
-            Toast.makeText(mac_cliente.this, "Cliente cargado con exito", Toast.LENGTH_SHORT).show();
+            editClient = db.getCliente(idCliente);
+            if(editClient != null)
+            {
+
+                txtRFCCRU.setText(editClient.getRfc());
+                txtNombreClienteCRU.setText(editClient.getNombre());
+                txtDireccionClienteCRU.setText(editClient.getDomicilio());
+                txtTelefonoClienteCRU.setText(editClient.getTelefono());
+                txtLatitude.setText(String.valueOf(editClient.getCoordenada().latitude));
+                txtLongitude.setText(String.valueOf(editClient.getCoordenada().longitude));
+                cbxRegimenFiscal.setSelection(editClient.getIdRegimenFiscal());
+                editMode = true;
+                txtRFCCRU.setEnabled(false);
+                Toast.makeText(mac_cliente.this, "Cliente cargado con exito", Toast.LENGTH_SHORT).show();    
+            }
+            else
+                Toast.makeText(this, "No se encontró el cliente seleccionado", Toast.LENGTH_SHORT).show();
+            
         }
     }
 
@@ -135,23 +152,34 @@ public class mac_cliente extends AppCompatActivity {//implements OnMapReadyCallb
             @Override
             public void onClick(View view) {
 
-                cliente Cliente = new cliente();
-                Cliente.setNombre(txtNombreClienteCRU.getText().toString());
-                Cliente.setDomicilio(txtDireccionClienteCRU.getText().toString());
-                Cliente.setRfc(txtRFCCRU.getText().toString());
-                Cliente.setTelefono(txtTelefonoClienteCRU.getText().toString());
-                Cliente.setEstadoActual(estado_cliente.sinConfirmar);
-                Cliente.setIdRegimenFiscal((int) cbxRegimenFiscal.getSelectedItemId());
-                Cliente.setCoordenada(latLngCliente);
+                    cliente Cliente = new cliente();
+                    Cliente.setRfc(txtRFCCRU.getText().toString());
+                    Cliente.setNombre(txtNombreClienteCRU.getText().toString());
+                    Cliente.setDomicilio(txtDireccionClienteCRU.getText().toString());
+                    Cliente.setTelefono(txtTelefonoClienteCRU.getText().toString());
+                    Cliente.setEstadoActual(estado_cliente.sinConfirmar);
+                    Cliente.setIdRegimenFiscal((int) cbxRegimenFiscal.getSelectedItemId());
+                    Cliente.setCoordenada(latLngCliente);
+                    Cliente.setFechaUltimaModificacion(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
-                if(Cliente.validateAllDataNoID())
-                {
-                    clienteSQL db = new clienteSQL(getApplicationContext());
-                    db.insert(Cliente);
-                    Toast.makeText(mac_cliente.this, "Guardado", Toast.LENGTH_SHORT).show();    
-                }
-                else
-                    Toast.makeText(mac_cliente.this, "Todos los datos son obligatorios", Toast.LENGTH_SHORT).show();
+                    if(Cliente.validateAllDataNoID())
+                    {
+                        clienteSQL db = new clienteSQL(getApplicationContext());
+                        if(editMode) {
+                            db.update(Cliente);
+                            Toast.makeText(mac_cliente.this, "Cliente actualizado con éxito", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            db.insert(Cliente);
+                            Toast.makeText(mac_cliente.this, "Cliente agregado con éxito", Toast.LENGTH_SHORT).show();
+                        }
+
+                        finish();
+                    }
+                    else
+                        Toast.makeText(mac_cliente.this, "Todos los datos son obligatorios", Toast.LENGTH_SHORT).show();
+
+
                 
             }
         });

@@ -69,6 +69,13 @@ public class mensajeSQL extends SQLHelper {
 
         db.close();
     }
+    public void deleteAll()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(tbl_psm_mensaje.name, null, null);
+
+        db.close();
+    }
     public mensaje getmensaje(int id)
     {
         mensaje mensaje = null;

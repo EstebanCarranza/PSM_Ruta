@@ -3,6 +3,8 @@ package com.twicky.estebancarranza.reparto.models;
 import com.google.android.gms.maps.model.LatLng;
 import com.twicky.estebancarranza.reparto.estaticos.estado_cliente;
 
+import java.sql.Timestamp;
+
 /**
  * Created by esteban.carranza on 10/03/2018.
  */
@@ -15,8 +17,16 @@ public class cliente {
     private String domicilio;
     private String telefono;
     private LatLng coordenada;
-
     private estado_cliente estadoActual;
+    private String fechaUltimaModificacion;
+
+    public String getFechaUltimaModificacion() {
+        return fechaUltimaModificacion;
+    }
+
+    public void setFechaUltimaModificacion(String fechaUltimaModificacion) {
+        this.fechaUltimaModificacion = fechaUltimaModificacion;
+    }
 
     public estado_cliente getEstadoActual() {
         return estadoActual;
@@ -36,7 +46,7 @@ public class cliente {
         this.estadoActual = estadoActual;
     }
 
-    public cliente(int id, String rfc, String nombre, int idRegimenFiscal, String domicilio, String telefono, LatLng coordenada, estado_cliente estadoActual) {
+    public cliente(int id, String rfc, String nombre, int idRegimenFiscal, String domicilio, String telefono, LatLng coordenada, estado_cliente estadoActual, String fechaUltimaModificacion) {
         this.id = id;
         this.rfc = rfc;
         this.nombre = nombre;
@@ -45,6 +55,7 @@ public class cliente {
         this.telefono = telefono;
         this.coordenada = coordenada;
         this.estadoActual = estadoActual;
+        this.fechaUltimaModificacion = fechaUltimaModificacion;
     }
 
     public String getNombre() {

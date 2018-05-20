@@ -11,7 +11,10 @@ import com.twicky.estebancarranza.reparto.database.tables.tbl_psm_cliente;
 import com.twicky.estebancarranza.reparto.models.cliente;
 import com.twicky.estebancarranza.reparto.estaticos.estado_cliente;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+
+import static com.twicky.estebancarranza.reparto.util.TimeStampConverts.convertStringToTimestamp;
 
 /**
  * Created by esteban.carranza on 10/05/2018.
@@ -33,6 +36,8 @@ public class clienteSQL extends SQLHelper {
         values.put(tbl_psm_cliente.column.name.telefono, Cliente.getTelefono());
         values.put(tbl_psm_cliente.column.name.latitude, Cliente.getCoordenada().latitude);
         values.put(tbl_psm_cliente.column.name.longitude, Cliente.getCoordenada().longitude);
+        values.put(tbl_psm_cliente.column.name.fechaUltimaModificacion, Cliente.getFechaUltimaModificacion().toString());
+
 
 
         SQLiteDatabase db = getWritableDatabase();
@@ -51,10 +56,11 @@ public class clienteSQL extends SQLHelper {
         values.put(tbl_psm_cliente.column.name.telefono, Cliente.getTelefono());
         values.put(tbl_psm_cliente.column.name.latitude, Cliente.getCoordenada().latitude);
         values.put(tbl_psm_cliente.column.name.longitude, Cliente.getCoordenada().longitude);
+        values.put(tbl_psm_cliente.column.name.fechaUltimaModificacion, Cliente.getFechaUltimaModificacion().toString());
 
         SQLiteDatabase db = getWritableDatabase();
 
-        String where = tbl_psm_cliente.column.name.idCliente + " = " + Cliente.getId();
+        String where = tbl_psm_cliente.column.name.rfc + " = '" + Cliente.getRfc() + "'";
         long id = db.update(tbl_psm_cliente.name, values, where, null);
         db.close();
     }
@@ -95,8 +101,9 @@ public class clienteSQL extends SQLHelper {
             float Longitude = cursor.getFloat(cursor.getColumnIndex(tbl_psm_cliente.column.name.longitude));
             LatLng coordenada = new LatLng(Latitude, Longitude);
             clienteLocal.setCoordenada(coordenada);
-            //String estadoCliente = cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.estadoCliente));
+            clienteLocal.setFechaUltimaModificacion(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.fechaUltimaModificacion)));
 
+            Cliente = clienteLocal;
 
             cursor.close();
         }
@@ -128,7 +135,9 @@ public class clienteSQL extends SQLHelper {
                 float Longitude = cursor.getFloat(cursor.getColumnIndex(tbl_psm_cliente.column.name.longitude));
                 LatLng coordenada = new LatLng(Latitude, Longitude);
                 clienteLocal.setCoordenada(coordenada);
-                //String estadoCliente = cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.estadoCliente));
+                String datetime = cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.fechaUltimaModificacion));
+                clienteLocal.setFechaUltimaModificacion(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.fechaUltimaModificacion)));
+
 
                 Clientes.add(clienteLocal);
                 cursor.moveToNext();
@@ -140,5 +149,67 @@ public class clienteSQL extends SQLHelper {
         return Clientes;
     }
 
+    public ArrayList<cliente> insertIfNotExists(ArrayList<cliente> cliente)
+    {
+        int i = 0;
+        int totalClientes = cliente.size();
+        boolean encontrado = false;
+        while(i < totalClientes) {
+            SQLiteDatabase db = getWritableDatabase();
+            String where = "where " +
+                    tbl_psm_cliente.column.name.rfc + " = '" + cliente.get(i).getRfc() + "'";
+            Cursor cursor = db.rawQuery("select * from " + tbl_psm_cliente.name + " " + where + ";", null);
+            if (cursor.moveToFirst()) {
+                encontrado = true;
+                while (!cursor.isAfterLast()) {
+                    cliente clienteLocal = new cliente();
+
+                    clienteLocal.setId(cursor.getInt(cursor.getColumnIndex(tbl_psm_cliente.column.name.idCliente)));
+                    clienteLocal.setRfc(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.rfc)));
+                    clienteLocal.setNombre(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.razonSocial)));
+                    clienteLocal.setDomicilio(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.direccion)));
+                    clienteLocal.setEstadoActual(estado_cliente.sinConfirmar);
+                    clienteLocal.setTelefono(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.telefono)));
+                    float Latitude = cursor.getFloat(cursor.getColumnIndex(tbl_psm_cliente.column.name.latitude));
+                    float Longitude = cursor.getFloat(cursor.getColumnIndex(tbl_psm_cliente.column.name.longitude));
+                    LatLng coordenada = new LatLng(Latitude, Longitude);
+                    clienteLocal.setCoordenada(coordenada);
+                    String datetime = cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.fechaUltimaModificacion));
+                    clienteLocal.setFechaUltimaModificacion(cursor.getString(cursor.getColumnIndex(tbl_psm_cliente.column.name.fechaUltimaModificacion)));
+
+                    Timestamp fechaActual = convertStringToTimestamp(cliente.get(i).getFechaUltimaModificacion());
+                    Timestamp fechaNueva = convertStringToTimestamp(clienteLocal.getFechaUltimaModificacion());
+                        /*if(fechaActual.getTime() > fechaNueva.getTime())
+                        {
+                            //SQLite tiene el dato mas reciente
+
+                        }
+                        if(fechaActual.getTime() < fechaNueva.getTime())
+                        {
+                            //MySQL tiene el dato mas reciente
+                        }*/
+
+
+                    cursor.moveToNext();
+                }
+                cursor.close();
+            }
+            db.close();
+
+            if(!encontrado)
+            {
+                insert(cliente.get(i));
+            }
+            encontrado = false;
+
+
+
+
+
+            i++;
+        }
+
+        return cliente;
+    }
 
 }

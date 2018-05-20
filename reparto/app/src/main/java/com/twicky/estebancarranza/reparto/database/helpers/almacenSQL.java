@@ -62,6 +62,14 @@ public class almacenSQL extends SQLHelper {
 
         db.close();
     }
+    public void deleteAll()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.delete(tbl_psm_almacen.name, null, null);
+
+        db.close();
+    }
     public almacen getAlmacen(int id)
     {
         almacen almacen = null;

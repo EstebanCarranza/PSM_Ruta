@@ -100,6 +100,7 @@
             android:parentActivityName=".activities.mac_configuracion" />
         <activity android:name=".activities.mac_test_and_other_things" />
         <activity android:name=".activities.frg_getUbicacionCliente"></activity>
+        <service android:name=".services.synchronizeClientsInBackground"/>
     </application>
 
 </manifest>

@@ -63,6 +63,13 @@ public class productoClienteSQL extends SQLHelper {
 
         db.close();
     }
+    public void deleteAll()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(tbl_psm_productoCliente.name, null, null);
+
+        db.close();
+    }
     public productoCliente getproductoCliente(int id)
     {
         productoCliente productoCliente = null;

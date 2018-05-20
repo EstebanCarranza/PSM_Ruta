@@ -219,7 +219,7 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
                                 startActivity(prodConfirm);
                                 break;
                             case cliente_lista_CRU:
-                                Toast.makeText(mac_prc_confirmarCliente.this, "Se abrirá el CRU de Cliente", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mac_prc_confirmarCliente.this, "Estás editando", Toast.LENGTH_SHORT).show();
                                 Intent clienteCRUD = new Intent(mac_prc_confirmarCliente.this, mac_cliente.class);
                                 clienteCRUD.putExtra("idCliente", listCliente.get(recycler.getChildAdapterPosition(view)).getId());
                                 startActivity(clienteCRUD);

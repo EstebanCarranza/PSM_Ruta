@@ -19,6 +19,7 @@ public class tbl_psm_cliente {
             static public final String latitude = "latitude";
             static public final String longitude = "longitude";
             static public final String estadoCliente = "estadoCliente";
+            static public final String fechaUltimaModificacion = "fechaUltimaModificacion";
 
         }
 
@@ -34,7 +35,8 @@ public class tbl_psm_cliente {
                     column.name.telefono + " text," +
                     column.name.latitude + " real," +
                     column.name.longitude + " real," +
-                    column.name.estadoCliente + " integer" +
+                    column.name.estadoCliente + " integer," +
+                    column.name.fechaUltimaModificacion + " text" +
                     "); ";
     static public final String drop = "drop table " + name + "; ";
 }

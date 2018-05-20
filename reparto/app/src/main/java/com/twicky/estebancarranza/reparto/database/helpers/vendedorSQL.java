@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.twicky.estebancarranza.reparto.database.SQLHelper;
+import com.twicky.estebancarranza.reparto.database.tables.tbl_psm_rutaDetalle;
 import com.twicky.estebancarranza.reparto.database.tables.tbl_psm_vendedor;
 import com.twicky.estebancarranza.reparto.models.vendedor;
 
@@ -100,6 +101,28 @@ public class vendedorSQL extends SQLHelper{
         db.close();
 
         return vendedor;
+    }
+
+    public boolean validacionVendedorConRuta(int idVendedor)
+    {
+        String result = "";
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("select " + tbl_psm_rutaDetalle.column.name.idVendedor + " as result from " + tbl_psm_rutaDetalle.name + " where idVendedor = " + idVendedor + ";", null);
+        if(cursor.moveToFirst())
+        {
+
+            result = cursor.getString(cursor.getColumnIndex("result"));
+
+
+            cursor.close();
+        }
+        db.close();
+
+        if(result.equals(""))
+            return false;
+        else
+            return true;
     }
 
     public vendedor validarInicioSesion(String correo, String contrasenia)

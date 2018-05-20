@@ -65,6 +65,13 @@ public class configuracionSQL extends SQLHelper {
 
         db.close();
     }
+    public void deleteAll()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(tbl_psm_configuracion.name, null, null);
+
+        db.close();
+    }
     public configuracion getconfiguracion(int id)
     {
         configuracion configuracion = null;
