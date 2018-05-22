@@ -28,7 +28,7 @@ public class synchronizeClientsInBackground extends Service{
     @Override
     public void onCreate()
     {//Crear el servicio
-
+        //sincronizar(thisContext);
     }
     private void contar()
     {
@@ -43,17 +43,21 @@ public class synchronizeClientsInBackground extends Service{
     int total = 0;
     private void sincronizar(final Context context)
     {
-
-            new networking(context, new NetCallback() {
+        while(search) {
+            new networking(thisContext, new NetCallback() {
 
                 @Override
                 public void onWorkFinish(Object data) {
                     //final ArrayList<results> results = (ArrayList<results>) data;
                     final ArrayList<cliente> clientes = (ArrayList<cliente>) data;
 
-                    clienteSQL db = new clienteSQL(getApplicationContext());
-                    db.insertIfNotExists(clientes);
-                    Toast.makeText(context, "Clientes sincronizados correctamente", Toast.LENGTH_SHORT).show();
+                    if (clientes != null) {
+                        clienteSQL db = new clienteSQL(getApplicationContext());
+                        db.insertIfNotExists(clientes);
+                        // Toast.makeText(getApplicationContext(), "Clientes sincronizados correctamente", Toast.LENGTH_SHORT).show();
+                    }
+                    //else
+                    //    Toast.makeText(getApplicationContext(), "No se encontraron cambios a actualizar localmente", Toast.LENGTH_SHORT).show();
 
                 }
             }).execute("getSynchronizeClient");
@@ -63,19 +67,23 @@ public class synchronizeClientsInBackground extends Service{
             final ArrayList<cliente> clientes = db.getCliente(0, 0);
             int i = 0;
 
-            new networking(context, new NetCallback() {
+            new networking(thisContext, new NetCallback() {
 
                 @Override
                 public void onWorkFinish(Object data) {
                     //final ArrayList<results> results = (ArrayList<results>) data;
                     final String results = (String) data;
-
-                    Toast.makeText(context, results, Toast.LENGTH_SHORT).show();
+                    //if(!results.isEmpty())
+                    // {
+                    //     Toast.makeText(getApplicationContext(), results, Toast.LENGTH_SHORT).show();
+                    // }else
+                    //     Toast.makeText(getApplicationContext(), "No se enviaron cambios al servidor", Toast.LENGTH_SHORT).show();
 
                 }
             }).execute("SynchronizeClient", clientes);
 
 
+        }
     }
 
     @Override
@@ -89,7 +97,8 @@ public class synchronizeClientsInBackground extends Service{
          mediaPlayer = MediaPlayer.create(thisContext, R.raw.flyaway);
          mediaPlayer.start();
 
-       // sincronizar(thisContext);
+
+
 
 
         return START_STICKY; //identifica el proceso que se inicia
