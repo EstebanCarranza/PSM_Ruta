@@ -1,5 +1,6 @@
 package com.twicky.estebancarranza.reparto.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -14,8 +15,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.twicky.estebancarranza.reparto.R;
 import com.twicky.estebancarranza.reparto.database.helpers.vendedorSQL;
 import com.twicky.estebancarranza.reparto.estaticos.defaultData;
+import com.twicky.estebancarranza.reparto.estaticos.global;
 import com.twicky.estebancarranza.reparto.models.custom_color;
 import com.twicky.estebancarranza.reparto.models.vendedor;
+import com.twicky.estebancarranza.reparto.sharedPreferences.login;
 import com.twicky.estebancarranza.reparto.webservice.NetCallback;
 import com.twicky.estebancarranza.reparto.webservice.networking;
 
@@ -37,6 +40,7 @@ public class mac_login extends AppCompatActivity {
 
     private void remoteLogin()
     {
+
         String correo = txtCorreo.getText().toString();
         String contrasenia = txtContrasenia.getText().toString();
 
@@ -54,57 +58,103 @@ public class mac_login extends AppCompatActivity {
                         // Todoo el codigo dentro de este metodo se ejecuta dentro del hilo principal o hilo de la UI
                         if(result != null)
                         {
-                            Toast.makeText(mac_login.this, "Iniciaste sesión correctamente", Toast.LENGTH_SHORT).show();
-
-                            AlertDialog.Builder builder = new AlertDialog.Builder(mac_login.this);
-
-                            builder.setTitle("Iniciar sesión");
-                            builder.setMessage("¿Quieres guardar el inicio de sesión?");
-
-                            builder.setPositiveButton("Guardar sesión", new DialogInterface.OnClickListener() {
-
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(mac_login.this, "Sesión guardada :)", Toast.LENGTH_SHORT).show();
-                                    dialog.dismiss();
-                                    vendedorSQL db = new vendedorSQL(getApplicationContext());
-                                    vendedor vendedor = new vendedor();
-                                    vendedor = result;
-                                    vendedor.setLoginActive(1);
-                                    db.insert(vendedor);
-                                }
-                            });
-
-                            builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                    Toast.makeText(mac_login.this, "Sesion no guardada, la proxima vez tendrás que iniciar sesión", Toast.LENGTH_SHORT).show();
-                                    dialog.dismiss();
-                                }
-                            });
-
-                            AlertDialog alert = builder.create();
-                            alert.show();
-
+                            Toast.makeText(mac_login.this, "Iniciaste sesión correctamente de forma remota", Toast.LENGTH_SHORT).show();
+                            saveLocalUser(result);
 
                         }
                         else
                         {
-                            Toast.makeText(mac_login.this, "No estás registrado :(", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mac_login.this, "El usuario o la contraseña no existen o están incorrectos :(", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
         }).execute("RemoteLogin", correo, contrasenia);
+
+
     }
-    private vendedor localLogin()
+    public static vendedor localLogin(Context context, String correo, String contrasenia, boolean Encrypt)
     {
-        vendedorSQL db = new vendedorSQL(getApplicationContext());
-        vendedor vendedor =db.validarInicioSesion(txtCorreo.getText().toString(), txtContrasenia.getText().toString());
+        vendedorSQL db = new vendedorSQL(context);
+        db.setInsertToRemote(Encrypt);
+        vendedor vendedor = db.validarInicioSesion(correo, contrasenia);
+
 
         return vendedor;
 
+    }
+    private void saveLocalUser(final vendedor vendedor)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mac_login.this);
+
+        builder.setTitle("¿Guardar usuario localmente?");
+        builder.setMessage("Si guardas tu usuario localmente, la proxima vez que inicies sesión será más rapido");
+
+        builder.setPositiveButton("Si, usuario localmente", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(mac_login.this, "Elegiste guardar el usuario localmente", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+                double id = 0;
+
+                vendedorSQL db = new vendedorSQL(getApplicationContext());
+                db.setInsertToRemote(true);
+                id = db.insert(vendedor);
+                if(id > 0) {
+                    Toast.makeText(mac_login.this, "Usuario guardado correctamente", Toast.LENGTH_SHORT).show();
+                    saveLogin(vendedor);
+                }
+
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Toast.makeText(mac_login.this, "No guardaste el usuario localmente, la proxima vez que inicies se tendrá que tener conexión a internet", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+
+
+    }
+    private void saveLogin(final vendedor vendedor)
+    {
+        if(vendedor != null)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(mac_login.this);
+
+            builder.setTitle("Guardar inicio de sesion");
+            builder.setMessage("¿Quieres guardar tu inicio de sesión? \n Iniciarás más rapido la aplicación la proxima vez que la abras");
+
+            builder.setPositiveButton("Si, guardar inicio de sesión", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(mac_login.this, "Elegiste guardar inicio de sesión", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    login.setLoginAuto(getApplicationContext(), true, vendedor.getCorreo(), vendedor.getContrasenia());
+
+                }
+            });
+
+            builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    Toast.makeText(mac_login.this, "No guardaste el inicio de sesión, tendrás que agregar el usuario y contraseña la proxima vez que inicies la app", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
 
     private void Login()
@@ -133,11 +183,18 @@ public class mac_login extends AppCompatActivity {
                     }
                     break;
                     default:
-                       vendedor vendedor = localLogin();
-                        if(vendedor != null)
-                           remoteLogin();
-                        else
-                            Toast.makeText(mac_login.this, "Inicio se sesión local", Toast.LENGTH_SHORT).show();
+                       vendedor vendedor = null;
+                        vendedor = localLogin(getApplicationContext(), txtCorreo.getText().toString(),txtContrasenia.getText().toString(), false);
+                        if(vendedor == null)
+                            remoteLogin();
+                        else {
+                                Toast.makeText(mac_login.this, "Inicio se sesión local", Toast.LENGTH_SHORT).show();
+                                saveLogin(vendedor);
+                        }
+
+
+
+
                     break;
                 }
             }
@@ -211,6 +268,9 @@ public class mac_login extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Regresar");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
 
 
 

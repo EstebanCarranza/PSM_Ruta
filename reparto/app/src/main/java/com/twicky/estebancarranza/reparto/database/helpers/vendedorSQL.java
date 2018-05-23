@@ -23,12 +23,25 @@ public class vendedorSQL extends SQLHelper{
         super(context);
     }
 
+    public boolean isInsertToRemote() {
+        return insertToRemote;
+    }
+
+    public void setInsertToRemote(boolean insertToRemote) {
+        this.insertToRemote = insertToRemote;
+    }
+
+    private boolean insertToRemote = false;
     public long insert(vendedor vendedor)
     {
         long id = -1;
         ContentValues values = new ContentValues();
         values.put(tbl_psm_vendedor.column.name.correo, vendedor.getCorreo());
-        values.put(tbl_psm_vendedor.column.name.contrasenia, vendedor.getContrasenia());
+        if(insertToRemote)
+            values.put(tbl_psm_vendedor.column.name.contrasenia, (vendedor.getContrasenia()));
+        else
+            values.put(tbl_psm_vendedor.column.name.contrasenia, md5(vendedor.getContrasenia()));
+
         values.put(tbl_psm_vendedor.column.name.nombres, vendedor.getNombres());
         values.put(tbl_psm_vendedor.column.name.appat, vendedor.getAppat());
         values.put(tbl_psm_vendedor.column.name.apmat, vendedor.getApmat());
@@ -50,7 +63,7 @@ public class vendedorSQL extends SQLHelper{
         ContentValues values = new ContentValues();
 
         values.put(tbl_psm_vendedor.column.name.correo, vendedor.getCorreo());
-        values.put(tbl_psm_vendedor.column.name.contrasenia, vendedor.getContrasenia());
+        values.put(tbl_psm_vendedor.column.name.contrasenia, md5(vendedor.getContrasenia()));
         values.put(tbl_psm_vendedor.column.name.nombres, vendedor.getNombres());
         values.put(tbl_psm_vendedor.column.name.appat, vendedor.getAppat());
         values.put(tbl_psm_vendedor.column.name.apmat, vendedor.getApmat());
@@ -129,12 +142,14 @@ public class vendedorSQL extends SQLHelper{
     {
         vendedor vendedor = null;
 
+        if(!insertToRemote)
+            contrasenia = md5(contrasenia);
 
         SQLiteDatabase db = getReadableDatabase();
         String where =
                 tbl_psm_vendedor.column.name.correo + " = '" + correo + "' AND " +
-                tbl_psm_vendedor.column.name.contrasenia + " = '" + md5(contrasenia) + "' AND " +
-                tbl_psm_vendedor.column.name.loginActive + " =  1";
+                tbl_psm_vendedor.column.name.contrasenia + " = '" + contrasenia + "'" ; //+ "' AND " +
+                //tbl_psm_vendedor.column.name.loginActive + " =  0";
 
         Cursor cursor = db.query(tbl_psm_vendedor.name, null, where, null, null, null, null);
         if(cursor.moveToFirst())

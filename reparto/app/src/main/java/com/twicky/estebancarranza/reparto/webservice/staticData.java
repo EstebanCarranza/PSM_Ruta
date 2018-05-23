@@ -9,7 +9,7 @@ public class staticData {
     //static final String SERVER_PATH_GET_ADDRESS = "http://reparto.twicky.com.mx/synchronizeClients.php";
     static final String HOST_REMOTO = "http://reparto.twicky.com.mx/";
     static final String HOST_LOCAL = "http://192.168.0.13:8081/psm/";
-    static final String HOST = HOST_REMOTO;
+    static final String HOST = HOST_LOCAL;
     static final String SERVER_PATH_LOGIN = HOST + "login.php";
     static final String SERVER_PATH_GET_ADDRESS = HOST + "getAddress.php";
     static final String SERRVER_PATH_SYNCHRONIZE_CLIENTS = HOST + "synchronizeClients.php";

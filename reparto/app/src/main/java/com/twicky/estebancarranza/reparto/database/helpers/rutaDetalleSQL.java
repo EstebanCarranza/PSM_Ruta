@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.twicky.estebancarranza.reparto.database.SQLHelper;
 import com.twicky.estebancarranza.reparto.database.tables.tbl_psm_rutaDetalle;
 import com.twicky.estebancarranza.reparto.models.rutaDetalle;
+import com.twicky.estebancarranza.reparto.models.vendedor;
 
 import java.util.ArrayList;
 
@@ -124,5 +125,36 @@ public class rutaDetalleSQL extends SQLHelper {
         db.close();
 
         return ListRutaDetalle;
+    }
+    public rutaDetalle validarRuta(vendedor vendedor)
+    {
+        rutaDetalle rutaDetalle = null;
+
+        SQLiteDatabase db = getWritableDatabase();
+        String where =
+                "idVendedor = " + vendedor.getIdVendedor() +
+                ""
+                ;
+
+        Cursor cursor = db.rawQuery("select * from " + tbl_psm_rutaDetalle.name + " "+ where +";", null);
+        if(cursor.moveToFirst())
+        {
+            while (!cursor.isAfterLast())
+            {
+                rutaDetalle = new rutaDetalle();
+
+                rutaDetalle.setIdRutaDetalle(cursor.getInt(cursor.getColumnIndex(tbl_psm_rutaDetalle.column.name.idRutaDetalle)));
+                rutaDetalle.setIdRuta(cursor.getInt(cursor.getColumnIndex(tbl_psm_rutaDetalle.column.name.idRuta)));
+                rutaDetalle.setIdVendedor(cursor.getInt(cursor.getColumnIndex(tbl_psm_rutaDetalle.column.name.idVendedor)));
+                rutaDetalle.setIdProductoCliente(cursor.getInt(cursor.getColumnIndex(tbl_psm_rutaDetalle.column.name.idProductoCliente)));
+
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        db.close();
+
+
+        return rutaDetalle;
     }
 }

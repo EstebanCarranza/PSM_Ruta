@@ -16,4 +16,15 @@
     <color name="text_colorHint">#A0A0A0</color>
     <color name="text_colorBtn">#DDDDDD</color>
     <color name="text_colorHintBtn">#dd0000</color>
+
+
+    <color name="LightTheme_backgroundColor">#fdfefe</color>
+
+    <color name="DarkTheme_backgroundColor">#333333</color>
+    <color name="DarkTheme_textColor">#fdfefe</color>
+
+
+
+
+
 </resources>

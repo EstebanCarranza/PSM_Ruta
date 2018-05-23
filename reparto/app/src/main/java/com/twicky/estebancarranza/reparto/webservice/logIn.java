@@ -30,7 +30,7 @@ public class logIn {
         String login = "";
         String postParams = "&correo=" + correo + "&contrasenia=" + md5(contrasenia);
         String response = "";
-        vendedor vendedor = new vendedor();
+        vendedor vendedor = null;
         HttpURLConnection conn = null;
         URL url = null;
         try {
@@ -60,15 +60,18 @@ public class logIn {
                 JSONArray jsonArray = new JSONArray();
                 JSONObject jsonObject = new JSONObject(jsonResponse);
 
-                vendedor.setIdVendedor(jsonObject.optInt("idVendedor"));
-                vendedor.setCorreo(jsonObject.getString("correo"));
-                vendedor.setNombres(jsonObject.getString("nombres"));
-                vendedor.setAppat(jsonObject.getString("appat"));
-                vendedor.setApmat(jsonObject.getString("apmat"));
-                vendedor.setFechNac(jsonObject.getString("fechNac"));
-                vendedor.setContrasenia(jsonObject.getString("contrasenia"));
+                if(jsonObject.getString("result").equals("OK")) {
+                    vendedor = new vendedor();
+                    vendedor.setIdVendedor(jsonObject.optInt("idVendedor"));
+                    vendedor.setCorreo(jsonObject.getString("correo"));
+                    vendedor.setNombres(jsonObject.getString("nombres"));
+                    vendedor.setAppat(jsonObject.getString("appat"));
+                    vendedor.setApmat(jsonObject.getString("apmat"));
+                    vendedor.setFechNac(jsonObject.getString("fechNac"));
+                    vendedor.setContrasenia(jsonObject.getString("contrasenia"));
 
-                return vendedor;
+
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();

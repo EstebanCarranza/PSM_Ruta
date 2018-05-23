@@ -1,159 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lntBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.twicky.estebancarranza.reparto.activities.mac_test_and_other_things">
 
-    <LinearLayout
-        android:id="@+id/lnr_Productos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnCrearProductos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Crear productos" />
-
-        <Button
-            android:id="@+id/btnBorrarProductos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Resetear productos" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lnr_Clientes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnCrearClientes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Crear clientes" />
-
-        <Button
-            android:id="@+id/btnBorrarClientes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Resetear clientes" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lnr_Rutas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnCrearRutas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Crear rutas" />
-
-        <Button
-            android:id="@+id/btnBorrarRutas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Resetear rutas" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lnt_Sincronizar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="=v" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Button" />
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/txtLatitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:ems="10"
-        android:textColorHint="@color/text_colorHint"
-        android:hint="Latitude"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/txtLongitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:ems="10"
-        android:textColorHint="@color/text_colorHint"
-        android:hint="Longitud"
-        android:inputType="textPersonName" />
-
-    <Button
-        android:id="@+id/btnHASH"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="hasheame" />
-
-    <Button
-        android:id="@+id/btnSincronizar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="Sincronizar" />
-
-    <Button
-        android:id="@+id/btnObtenerClientes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="Obtener clientes de MySQL" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0"
-        android:orientation="horizontal">
+        android:layout_weight="0">
 
-        <Button
-            android:id="@+id/btnIniciarServicio"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Iniciar servicio" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnDetenerServicio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Detener servicio" />
+            <LinearLayout
+                android:id="@+id/lnr_Rutas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <Button
+                    android:id="@+id/btnCrearRutas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Crear rutas" />
+
+                <Button
+                    android:id="@+id/btnBorrarRutas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Resetear rutas" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/txtLongitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:ems="10"
+                android:hint="Longitud"
+                android:inputType="textPersonName"
+
+                />
+
+            <LinearLayout
+                android:id="@+id/lnr_Clientes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnCrearClientes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Crear clientes" />
+
+                <Button
+                    android:id="@+id/btnBorrarClientes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Resetear clientes" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnt_Sincronizar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="=v" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Button" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/txtLatitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:ems="10"
+                android:hint="Latitude"
+                android:inputType="textPersonName"
+
+                />
+
+            <Button
+                android:id="@+id/btnSincronizar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="Sincronizar" />
+
+            <Button
+                android:id="@+id/btnObtenerClientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="Obtener clientes de MySQL" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnIniciarServicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Iniciar servicio" />
+
+                <Button
+                    android:id="@+id/btnDetenerServicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Detener servicio" />
+
+                <Button
+                    android:id="@+id/btnBubble"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Abrir burbuja" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnObtenerVendedores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="Obtener vendedores" />
+
+            <Button
+                android:id="@+id/btnActivarSensor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="Sensor de luz" />
+
+            <Button
+                android:id="@+id/btnHASH"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="hasheame" />
+
+            <LinearLayout
+                android:id="@+id/lnr_Productos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnCrearProductos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Crear productos" />
+
+                <Button
+                    android:id="@+id/btnBorrarProductos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Resetear productos" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

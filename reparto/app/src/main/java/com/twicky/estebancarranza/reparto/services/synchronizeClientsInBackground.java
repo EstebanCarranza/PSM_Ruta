@@ -44,6 +44,24 @@ public class synchronizeClientsInBackground extends Service{
     private void sincronizar(final Context context)
     {
         while(search) {
+            clienteSQL db = new clienteSQL(getApplicationContext());
+            final ArrayList<cliente> clientes = db.getCliente(0, 0);
+            int i = 0;
+
+            new networking(thisContext, new NetCallback() {
+
+                @Override
+                public void onWorkFinish(Object data) {
+                    //final ArrayList<results> results = (ArrayList<results>) data;
+                    final String results = (String) data;
+                    //if(!results.isEmpty())
+                    // {
+                    //     Toast.makeText(getApplicationContext(), results, Toast.LENGTH_SHORT).show();
+                    // }else
+                    //     Toast.makeText(getApplicationContext(), "No se enviaron cambios al servidor", Toast.LENGTH_SHORT).show();
+
+                }
+            }).execute("SynchronizeClient", clientes);
             new networking(thisContext, new NetCallback() {
 
                 @Override
@@ -63,24 +81,7 @@ public class synchronizeClientsInBackground extends Service{
             }).execute("getSynchronizeClient");
 
 
-            clienteSQL db = new clienteSQL(getApplicationContext());
-            final ArrayList<cliente> clientes = db.getCliente(0, 0);
-            int i = 0;
 
-            new networking(thisContext, new NetCallback() {
-
-                @Override
-                public void onWorkFinish(Object data) {
-                    //final ArrayList<results> results = (ArrayList<results>) data;
-                    final String results = (String) data;
-                    //if(!results.isEmpty())
-                    // {
-                    //     Toast.makeText(getApplicationContext(), results, Toast.LENGTH_SHORT).show();
-                    // }else
-                    //     Toast.makeText(getApplicationContext(), "No se enviaron cambios al servidor", Toast.LENGTH_SHORT).show();
-
-                }
-            }).execute("SynchronizeClient", clientes);
 
 
         }

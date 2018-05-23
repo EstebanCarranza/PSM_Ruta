@@ -20,6 +20,8 @@ public class rutaSQL extends SQLHelper {
         super(context);
     }
 
+
+
     public long insert(ruta ruta)
     {
         long id = -1;

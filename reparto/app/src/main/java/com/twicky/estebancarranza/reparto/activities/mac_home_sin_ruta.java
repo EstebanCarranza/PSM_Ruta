@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 
 import com.twicky.estebancarranza.reparto.R;
 import com.twicky.estebancarranza.reparto.adapters.list_buttons;
 import com.twicky.estebancarranza.reparto.estaticos.ID;
+import com.twicky.estebancarranza.reparto.estaticos.global;
+import com.twicky.estebancarranza.reparto.models.vendedor;
 
 import java.util.ArrayList;
 
@@ -19,7 +22,7 @@ public class mac_home_sin_ruta extends AppCompatActivity {
     ArrayList<String> listDatos;
     ArrayList<list_buttons.Boton> listBotones;
     RecyclerView recycler;
-
+    TextView lblUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,10 @@ public class mac_home_sin_ruta extends AppCompatActivity {
 
       construirRecycler();
 
+      lblUser = (TextView) findViewById(R.id.lblUser);
+
+        vendedor vendedor = global.getVendedor();
+        lblUser.setText(vendedor.getNombres() + " " + vendedor.getAppat());
 
     }
 

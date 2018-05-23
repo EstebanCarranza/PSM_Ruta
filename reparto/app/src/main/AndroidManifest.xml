@@ -80,8 +80,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBgq1EU6PKHIVpX8p2CBy-NA2G6Ngrjku4" />
-            <!--android:value="@string/google_maps_key" />-->
-
+        <!-- android:value="@string/google_maps_key" /> -->
 
         <activity
             android:name=".activities.mac_ubicacion_cliente"
@@ -99,8 +98,11 @@
             android:name=".activities.mac_pin"
             android:parentActivityName=".activities.mac_configuracion" />
         <activity android:name=".activities.mac_test_and_other_things" />
-        <activity android:name=".activities.frg_getUbicacionCliente"></activity>
-        <service android:name=".services.synchronizeClientsInBackground"/>
+        <activity android:name=".activities.frg_getUbicacionCliente" />
+
+        <service android:name=".services.synchronizeClientsInBackground" />
+
+        <activity android:name=".activities.mac_bubble"></activity>
     </application>
 
 </manifest>
