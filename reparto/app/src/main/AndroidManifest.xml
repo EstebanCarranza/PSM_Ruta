@@ -58,9 +58,12 @@
 
         <!-- HIJOS DE HCR -->
         <activity
+            android:name=".activities.mac_lista_vendedores"
+            android:parentActivityName=".activities.mac_home_con_ruta" />
+        <activity
             android:name=".activities.mac_mensajes"
             android:label="@string/title_activity_mac_mensajes"
-            android:parentActivityName=".activities.mac_home_con_ruta" />
+            android:parentActivityName=".activities.mac_lista_vendedores" />
         <activity
             android:name=".activities.mac_cliente"
             android:label="@string/title_activity_mac_cliente"
@@ -102,7 +105,9 @@
 
         <service android:name=".services.synchronizeClientsInBackground" />
 
-        <activity android:name=".activities.mac_bubble"></activity>
+        <activity android:name=".activities.mac_bubble" />
+        <activity android:name=".activities.mac_datos_personales"
+            android:parentActivityName=".activities.mac_configuracion"></activity>
     </application>
 
 </manifest>

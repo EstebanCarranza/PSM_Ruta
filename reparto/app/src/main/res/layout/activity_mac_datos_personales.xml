@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnlBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="com.twicky.estebancarranza.reparto.activities.mac_datos_personales"
+    tools:openDrawer="start">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/picUser"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+            <TextView
+                android:id="@+id/lblTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Datos del usuario"
+                android:textAlignment="center"
+                android:textSize="35sp" />
+
+            <TextView
+                android:id="@+id/lblCorreo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:paddingBottom="10dp"
+                android:text="esteban.carranza@outlook.com"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/txtNombres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Nombres"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/txtAppat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Apellido paterno"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/txtApmat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Apellido materno"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/txtFechNac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Fecha de nacimiento (AAAA-MM-DD)"
+                android:inputType="date" />
+
+            <Button
+                android:id="@+id/btnGuardar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Guardar cambios"
+                android:textColor="@color/background_color" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

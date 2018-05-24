@@ -10,7 +10,7 @@ public class tbl_psm_almacen {
     {
         public class name
         {
-            static public final String idAlmacen   = "idAlmacen";
+            static public final String idAlmacen   = "idVendedor2";
             static public final String titulo       = "titulo";
             static public final String direccion  = "direccion";
             static public final String coordenada = "coordenada";

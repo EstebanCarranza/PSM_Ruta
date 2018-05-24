@@ -57,6 +57,25 @@ public class vendedorSQL extends SQLHelper{
         return id;
 
     }
+    public long updatePersonalData(vendedor vendedor)
+    {
+        long id = -1;
+        ContentValues values = new ContentValues();
+
+        values.put(tbl_psm_vendedor.column.name.correo, vendedor.getCorreo());
+        values.put(tbl_psm_vendedor.column.name.nombres, vendedor.getNombres());
+        values.put(tbl_psm_vendedor.column.name.appat, vendedor.getAppat());
+        values.put(tbl_psm_vendedor.column.name.apmat, vendedor.getApmat());
+        values.put(tbl_psm_vendedor.column.name.fechNac, vendedor.getFechNac());
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        String where = tbl_psm_vendedor.column.name.idVendedor + " = " + vendedor.getIdVendedor();
+        id = db.update(tbl_psm_vendedor.name, values, where, null);
+        db.close();
+
+        return id;
+    }
     public long update(vendedor vendedor)
     {
         long id = -1;
@@ -121,7 +140,7 @@ public class vendedorSQL extends SQLHelper{
         String result = "";
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("select " + tbl_psm_rutaDetalle.column.name.idVendedor + " as result from " + tbl_psm_rutaDetalle.name + " where idVendedor = " + idVendedor + ";", null);
+        Cursor cursor = db.rawQuery("select " + tbl_psm_rutaDetalle.column.name.idVendedor + " as result from " + tbl_psm_rutaDetalle.name + " where idVendedor1 = " + idVendedor + ";", null);
         if(cursor.moveToFirst())
         {
 

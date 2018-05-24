@@ -31,6 +31,9 @@ public class mac_ruta  extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         construirRecycler();
 
+        //onBackPressed();
+
+
     }
 
     private void construirRecycler()
@@ -40,11 +43,11 @@ public class mac_ruta  extends AppCompatActivity {
 
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        menu.add(new list_buttons.Boton(getString(R.string.strVerProductosTitleRUTA), getString(R.string.strVerProductosDescRUTA), ID.RUTA.btnVerProductos));
-        menu.add(new list_buttons.Boton(getString(R.string.strEntregaMercanciaTitleRUTA), getString(R.string.strEntregarMercanciaDescRUTA), ID.RUTA.btnEntregarMercancia));
-        menu.add(new list_buttons.Boton(getString(R.string.strRecogerMercanciaTitleRUTA), getString(R.string.strRecogerMercanciaDescRUTA), ID.RUTA.btnRecogerMercancia));
+       // menu.add(new list_buttons.Boton(getString(R.string.strVerProductosTitleRUTA), getString(R.string.strVerProductosDescRUTA), ID.RUTA.btnVerProductos));
+        //menu.add(new list_buttons.Boton(getString(R.string.strEntregaMercanciaTitleRUTA), getString(R.string.strEntregarMercanciaDescRUTA), ID.RUTA.btnEntregarMercancia));
+        //menu.add(new list_buttons.Boton(getString(R.string.strRecogerMercanciaTitleRUTA), getString(R.string.strRecogerMercanciaDescRUTA), ID.RUTA.btnRecogerMercancia));
         menu.add(new list_buttons.Boton(getString(R.string.strVerUbicacionClientesTitleRUTA), getString(R.string.strVerUbicacionClientesDescRUTA), ID.RUTA.btnAbrirMapa));
-        menu.add(new list_buttons.Boton(getString(R.string.strFinalizarRutaTitleRUTA), getString(R.string.strFinalizarRutaDescRUTA), ID.RUTA.btnFinalizarRuta));
+        //menu.add(new list_buttons.Boton(getString(R.string.strFinalizarRutaTitleRUTA), getString(R.string.strFinalizarRutaDescRUTA), ID.RUTA.btnFinalizarRuta));
 
         ArrayList<Object> objListBotones = (ArrayList<Object>)(ArrayList<?>)(menu);
         list_buttons adapter = new list_buttons(objListBotones);

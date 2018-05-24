@@ -11,7 +11,7 @@ public class tbl_psm_configuracion {
         public class name
         {
             static public final String idConfiguracion   = "idConfiguracion";
-            static public final String idVendedor       = "idVendedor";
+            static public final String idVendedor       = "idVendedor1";
             static public final String idTema  = "idTema";
             static public final String PIN = "PIN";
             static public final String activarPIN = "activarPIN";

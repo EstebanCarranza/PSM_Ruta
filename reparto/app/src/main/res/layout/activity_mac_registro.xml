@@ -3,14 +3,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnlBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.twicky.estebancarranza.reparto.activities.mac_registro"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     android:padding="20dp"
 
-    >
+    tools:context="com.twicky.estebancarranza.reparto.activities.mac_registro">
     <!--android:theme="@style/Theme.AppCompat.NoActionBar"-->
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,8 +19,8 @@
         android:layout_height="50dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        tools:context="com.twicky.estebancarranza.reparto.activities.mac_registro"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        tools:context="com.twicky.estebancarranza.reparto.activities.mac_registro">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -51,9 +51,7 @@
         android:maxLines="1"
         android:singleLine="true"
         android:textColor="@color/text_color"
-        android:textColorHint="@color/text_colorHint"
-        />
-
+        android:textColorHint="@color/text_colorHint" />
 
 
     <EditText
@@ -62,19 +60,35 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Contraseña"
+        android:inputType="textPassword"
         android:textColor="@color/text_color"
-        android:textColorHint="@color/text_colorHint"
-        android:inputType="textPassword" />
+        android:textColorHint="@color/text_colorHint" />
 
     <EditText
         android:id="@+id/txtPassword02"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:textColor="@color/text_color"
-        android:textColorHint="@color/text_colorHint"
         android:hint="Repetir contraseña"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="@color/text_color"
+        android:textColorHint="@color/text_colorHint" />
+
+    <EditText
+        android:id="@+id/txtNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nombres"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtAppat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Apellido paterno"
+        android:inputType="textPersonName" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

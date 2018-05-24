@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnlBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -29,10 +30,18 @@
         android:textColorHint="@color/text_colorHint" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnActivarPIN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="@color/background_color"
-        android:text="@string/strPIN_Boton" />
+        android:text="@string/strPIN_Boton"
+        android:textColor="@color/background_color" />
+
+    <Button
+        android:id="@+id/btnDesactivarPIN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Desactivar PIN"
+        android:textColor="@color/background_color" />
 </LinearLayout>

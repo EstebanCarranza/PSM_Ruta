@@ -26,10 +26,10 @@ public class mensajeSQL extends SQLHelper {
         ContentValues values = new ContentValues();
         values.put(tbl_psm_mensaje.column.name.mensaje, mensaje.getMensaje());
         values.put(tbl_psm_mensaje.column.name.idRuta, mensaje.getIdRuta());
-        values.put(tbl_psm_mensaje.column.name.idVendedor, mensaje.getIdVendedor());
-        values.put(tbl_psm_mensaje.column.name.idAlmacen, mensaje.getIdAlmacen());
+        values.put(tbl_psm_mensaje.column.name.idVendedor1, mensaje.getIdVendedor1());
+        values.put(tbl_psm_mensaje.column.name.idVendedor2, mensaje.getIdVendedor2());
         values.put(tbl_psm_mensaje.column.name.fechaEnvio, mensaje.getFechaEnvio());
-        values.put(tbl_psm_mensaje.column.name.me, mensaje.getMe());
+        //values.put(tbl_psm_mensaje.column.name.me, mensaje.getMe());
         
 
         SQLiteDatabase db = getWritableDatabase();
@@ -48,8 +48,8 @@ public class mensajeSQL extends SQLHelper {
 
         values.put(tbl_psm_mensaje.column.name.mensaje, mensaje.getMensaje());
         values.put(tbl_psm_mensaje.column.name.idRuta, mensaje.getIdRuta());
-        values.put(tbl_psm_mensaje.column.name.idVendedor, mensaje.getIdVendedor());
-        values.put(tbl_psm_mensaje.column.name.idAlmacen, mensaje.getIdAlmacen());
+        values.put(tbl_psm_mensaje.column.name.idVendedor1, mensaje.getIdVendedor1());
+        values.put(tbl_psm_mensaje.column.name.idVendedor2, mensaje.getIdVendedor2());
         values.put(tbl_psm_mensaje.column.name.fechaEnvio, mensaje.getFechaEnvio());
         values.put(tbl_psm_mensaje.column.name.me, mensaje.getMe());
 
@@ -92,8 +92,8 @@ public class mensajeSQL extends SQLHelper {
             mensaje.setidMensaje(cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.idMensaje)));
             mensaje.setMensaje(cursor.getString(cursor.getColumnIndex(tbl_psm_mensaje.column.name.mensaje)));
             mensaje.setIdRuta(cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.idRuta)));
-            mensaje.setIdVendedor(cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.idVendedor)));
-            mensaje.setIdAlmacen(cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.idAlmacen)));
+            mensaje.setIdVendedor1(cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.idVendedor1)));
+            mensaje.setIdVendedor2(cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.idVendedor2)));
             mensaje.setFechaEnvio(cursor.getString(cursor.getColumnIndex(tbl_psm_mensaje.column.name.fechaEnvio)));
             int MeLocal = cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.me));
             mensaje.setMe((MeLocal==1)?true:false);
@@ -106,13 +106,17 @@ public class mensajeSQL extends SQLHelper {
     }
 
 
-    public ArrayList<mensaje> getmensajees(int limit1, int limit2)
+    public ArrayList<mensaje> getmensajees(int idMe)
     {
         ArrayList<mensaje> ListMensaje = new ArrayList<mensaje>();
 
         SQLiteDatabase db = getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("select * from " + tbl_psm_mensaje.name + ";", null);
+        String where = " where " +
+                tbl_psm_mensaje.column.name.idVendedor1 + " = " + idMe + " OR " +
+                tbl_psm_mensaje.column.name.idVendedor2 + " = " + idMe + "";
+
+        Cursor cursor = db.rawQuery("select * from " + tbl_psm_mensaje.name + " " + where + ";", null);
         if(cursor.moveToFirst())
         {
             while (!cursor.isAfterLast())
@@ -122,11 +126,12 @@ public class mensajeSQL extends SQLHelper {
                 mensaje.setidMensaje(cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.idMensaje)));
                 mensaje.setMensaje(cursor.getString(cursor.getColumnIndex(tbl_psm_mensaje.column.name.mensaje)));
                 mensaje.setIdRuta(cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.idRuta)));
-                mensaje.setIdVendedor(cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.idVendedor)));
-                mensaje.setIdAlmacen(cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.idAlmacen)));
+                mensaje.setIdVendedor1(cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.idVendedor1)));
+                mensaje.setIdVendedor2(cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.idVendedor2)));
                 mensaje.setFechaEnvio(cursor.getString(cursor.getColumnIndex(tbl_psm_mensaje.column.name.fechaEnvio)));
-                int MeLocal = cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.me));
-                mensaje.setMe((MeLocal==1)?true:false);
+               // int MeLocal = cursor.getInt(cursor.getColumnIndex(tbl_psm_mensaje.column.name.me));
+
+                mensaje.setMe((mensaje.getIdVendedor1() == idMe)?true:false);
 
                 ListMensaje.add(mensaje);
                 cursor.moveToNext();

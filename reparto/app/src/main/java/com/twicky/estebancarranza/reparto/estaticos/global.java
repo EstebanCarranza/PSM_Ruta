@@ -18,6 +18,13 @@ public class global {
 
     static vendedor vendedor;
 
+    static vendedor vendedorMSG;
 
+    public static com.twicky.estebancarranza.reparto.models.vendedor getVendedorMSG() {
+        return vendedorMSG;
+    }
 
+    public static void setVendedorMSG(com.twicky.estebancarranza.reparto.models.vendedor vendedorMSG) {
+        global.vendedorMSG = vendedorMSG;
+    }
 }

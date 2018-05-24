@@ -25,10 +25,11 @@ public class mac_prc_confirmarCliente extends AppCompatActivity {
     
     ArrayList<cliente> listCliente;
     RecyclerView recycler;
+    list_clients adapter;
     TextView tvTotalClientesVal;
     TextView tvTotalClientesNoConfirmadosVal;
     TextView tvTotalClientesNoAsignadosVal;
-    list_clients adapter;
+
     Button btnConfirmarClienteCOC;
     custom_parameter opciones_adicionales;
     TextView lblConfirmarClientes;

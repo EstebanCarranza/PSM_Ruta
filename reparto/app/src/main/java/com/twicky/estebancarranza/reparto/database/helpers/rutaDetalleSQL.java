@@ -132,7 +132,7 @@ public class rutaDetalleSQL extends SQLHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         String where =
-                "idVendedor = " + vendedor.getIdVendedor() +
+                "idVendedor1 = " + vendedor.getIdVendedor() +
                 ""
                 ;
 

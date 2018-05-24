@@ -10,12 +10,12 @@ public class tbl_psm_mensaje {
     {
         public class name
         {
-            static public final String idMensaje   = "idMensaje";
+            static public final String idMensaje    = "idMensaje";
             static public final String idRuta       = "idRuta";
-            static public final String idVendedor  = "idVendedor";
-            static public final String idAlmacen = "idAlmacen";
-            static public final String mensaje = "mensaje";
-            static public final String fechaEnvio = "fechaEnvio";
+            static public final String idVendedor1 = "idVendedor1";
+            static public final String idVendedor2 = "idVendedor2";
+            static public final String mensaje      = "mensaje";
+            static public final String fechaEnvio   = "fechaEnvio";
             static public final String me = "me";
         }
     }
@@ -24,8 +24,8 @@ public class tbl_psm_mensaje {
                     "(" +
                     column.name.idMensaje + " integer not null primary key autoincrement," +
                     column.name.idRuta + " integer," +
-                    column.name.idVendedor + " integer," +
-                    column.name.idAlmacen + " integer," +
+                    column.name.idVendedor1 + " integer," +
+                    column.name.idVendedor2 + " integer," +
                     column.name.mensaje + " text," +
                     column.name.fechaEnvio + " text" +
                     column.name.me + " int" +

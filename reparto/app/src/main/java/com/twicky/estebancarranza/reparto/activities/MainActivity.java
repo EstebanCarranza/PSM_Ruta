@@ -69,8 +69,9 @@ public class MainActivity extends AppCompatActivity {
         }
         if(vendedor != null)
         {
-            Toast.makeText(this, "Iniciaste sesión con shared preferences " + vendedor.getNombres(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Iniciaste sesión automaticamente, bienvenido:  " + vendedor.getNombres(), Toast.LENGTH_SHORT).show();
             global.setVendedor(vendedor);
+            startActivity(new Intent(MainActivity.this, mac_home_con_ruta.class));
         }
 
 
@@ -94,40 +95,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onPause() {
-
-        super.onPause();
-        //Siempre suspender el sensor
-        m_sensorManager.unregisterListener(m_sensorEventListener);
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        m_sensorManager.registerListener(m_sensorEventListener,
-                m_sensor, SensorManager.SENSOR_DELAY_NORMAL);
-
-    }
-    SensorEventListener m_sensorEventListener = new SensorEventListener() {
         @Override
-        public void onSensorChanged(SensorEvent event) {
+        protected void onPause() {
 
-            intensidad = event.values[0];
-
-            if(intensidad < 10)
-            {
-                ln.setBackgroundColor(getResources().getColor(R.color.DarkTheme_backgroundColor));
-            }
-            else
-            {
-                ln.setBackgroundColor(getResources().getColor(R.color.LightTheme_backgroundColor));
-            }
+            super.onPause();
+            //Siempre suspender el sensor
+            m_sensorManager.unregisterListener(m_sensorEventListener);
         }
-
         @Override
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        protected void onResume() {
+            super.onResume();
+            m_sensorManager.registerListener(m_sensorEventListener,
+                    m_sensor, SensorManager.SENSOR_DELAY_NORMAL);
 
         }
+        SensorEventListener m_sensorEventListener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+
+                intensidad = event.values[0];
+
+                if(intensidad < 10)
+                {
+                    ln.setBackgroundColor(getResources().getColor(R.color.DarkTheme_backgroundColor));
+                }
+                else
+                {
+                    ln.setBackgroundColor(getResources().getColor(R.color.LightTheme_backgroundColor));
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
 
     };
 }

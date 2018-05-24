@@ -10,8 +10,8 @@ public class mensaje {
     int idMensaje;
     String mensaje;
     int idRuta;
-    int idVendedor;
-    int idAlmacen;
+    int idVendedor1;
+    int idVendedor2;
     String fechaEnvio;
     boolean me;
 
@@ -29,8 +29,8 @@ public class mensaje {
         this.idMensaje = idMensaje;
         this.mensaje = mensaje;
         this.idRuta = idRuta;
-        this.idVendedor = idVendedor;
-        this.idAlmacen = idAlmacen;
+        this.idVendedor1 = idVendedor;
+        this.idVendedor2 = idAlmacen;
         this.fechaEnvio = fechaEnvio;
         this.me = me;
     }
@@ -59,20 +59,20 @@ public class mensaje {
         this.idRuta = idRuta;
     }
 
-    public int getIdVendedor() {
-        return idVendedor;
+    public int getIdVendedor1() {
+        return idVendedor1;
     }
 
-    public void setIdVendedor(int idVendedor) {
-        this.idVendedor = idVendedor;
+    public void setIdVendedor1(int idVendedor1) {
+        this.idVendedor1 = idVendedor1;
     }
 
-    public int getIdAlmacen() {
-        return idAlmacen;
+    public int getIdVendedor2() {
+        return idVendedor2;
     }
 
-    public void setIdAlmacen(int idAlmacen) {
-        this.idAlmacen = idAlmacen;
+    public void setIdVendedor2(int idVendedor2) {
+        this.idVendedor2 = idVendedor2;
     }
 
     public String getFechaEnvio() {

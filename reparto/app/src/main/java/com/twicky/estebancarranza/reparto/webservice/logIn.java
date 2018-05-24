@@ -62,7 +62,7 @@ public class logIn {
 
                 if(jsonObject.getString("result").equals("OK")) {
                     vendedor = new vendedor();
-                    vendedor.setIdVendedor(jsonObject.optInt("idVendedor"));
+                    vendedor.setIdVendedor(jsonObject.optInt("idVendedor1"));
                     vendedor.setCorreo(jsonObject.getString("correo"));
                     vendedor.setNombres(jsonObject.getString("nombres"));
                     vendedor.setAppat(jsonObject.getString("appat"));

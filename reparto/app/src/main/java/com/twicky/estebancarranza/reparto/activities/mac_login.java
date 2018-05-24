@@ -3,12 +3,17 @@ package com.twicky.estebancarranza.reparto.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -23,6 +28,12 @@ import com.twicky.estebancarranza.reparto.webservice.NetCallback;
 import com.twicky.estebancarranza.reparto.webservice.networking;
 
 import java.util.ArrayList;
+
+import static com.twicky.estebancarranza.reparto.estaticos.global.setVendedor;
+import static com.twicky.estebancarranza.reparto.sensores.luz.intensidad;
+import static com.twicky.estebancarranza.reparto.sensores.luz.ln;
+import static com.twicky.estebancarranza.reparto.sensores.luz.m_sensor;
+import static com.twicky.estebancarranza.reparto.sensores.luz.m_sensorManager;
 
 public class mac_login extends AppCompatActivity {
 
@@ -138,7 +149,8 @@ public class mac_login extends AppCompatActivity {
                     Toast.makeText(mac_login.this, "Elegiste guardar inicio de sesión", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     login.setLoginAuto(getApplicationContext(), true, vendedor.getCorreo(), vendedor.getContrasenia());
-
+                    setVendedor(vendedor);
+                    startActivity(new Intent(mac_login.this, mac_home_con_ruta.class));
                 }
             });
 
@@ -149,6 +161,8 @@ public class mac_login extends AppCompatActivity {
 
                     Toast.makeText(mac_login.this, "No guardaste el inicio de sesión, tendrás que agregar el usuario y contraseña la proxima vez que inicies la app", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+                    setVendedor(vendedor);
+                    startActivity(new Intent(mac_login.this, mac_home_con_ruta.class));
                 }
             });
 
@@ -189,7 +203,9 @@ public class mac_login extends AppCompatActivity {
                             remoteLogin();
                         else {
                                 Toast.makeText(mac_login.this, "Inicio se sesión local", Toast.LENGTH_SHORT).show();
+
                                 saveLogin(vendedor);
+
                         }
 
 
@@ -270,6 +286,9 @@ public class mac_login extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+        ln = (LinearLayout) findViewById(R.id.lnlBackground);
+        m_sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        m_sensor = m_sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
 
 
@@ -283,4 +302,41 @@ public class mac_login extends AppCompatActivity {
         LoginFacebook();
 
     }
+
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+        //Siempre suspender el sensor
+        m_sensorManager.unregisterListener(m_sensorEventListener);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        m_sensorManager.registerListener(m_sensorEventListener,
+                m_sensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+    }
+    SensorEventListener m_sensorEventListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+
+            intensidad = event.values[0];
+
+            if(intensidad < 10)
+            {
+                ln.setBackgroundColor(getResources().getColor(R.color.DarkTheme_backgroundColor));
+            }
+            else
+            {
+                ln.setBackgroundColor(getResources().getColor(R.color.LightTheme_backgroundColor));
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+
+    };
 }

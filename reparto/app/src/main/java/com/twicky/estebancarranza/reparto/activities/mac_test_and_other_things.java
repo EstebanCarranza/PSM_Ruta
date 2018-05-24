@@ -300,10 +300,13 @@ public class mac_test_and_other_things extends AppCompatActivity  {
         btnObtenerVendedores.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                startActivity(new Intent(mac_test_and_other_things.this, mac_lista_vendedores.class));
+                /*
                 vendedorSQL db = new vendedorSQL(getApplicationContext());
                 ArrayList<vendedor> vendedores = new ArrayList<>();
                 vendedores = db.getVendedores(0,0);
-                int a  = 0;
+                int a  = 0;*/
             }
         });
 

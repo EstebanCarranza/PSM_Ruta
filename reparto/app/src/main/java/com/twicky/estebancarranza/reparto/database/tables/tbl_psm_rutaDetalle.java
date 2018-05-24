@@ -12,7 +12,7 @@ public class tbl_psm_rutaDetalle {
         {
             static public final String idRutaDetalle   = "idRutaDetalle";
             static public final String idRuta       = "idRuta";
-            static public final String idVendedor  = "idVendedor";
+            static public final String idVendedor  = "idVendedor1";
             static public final String idProductoCliente = "idProductoCliente";
         }
     }

@@ -48,6 +48,7 @@ public class ID {
         public static final String btnAgregarPIN = "btnAgregarPIN";
         public static final String btnVerDatosPersonales = "btnVerDatosPersonales";
         public static final String btnCerrarSesion = "btnCerrarSesion";
+        public static final String btnSincronizar = "btnSincronizar";
     }
 
 
