@@ -6,4 +6,5 @@ package com.twicky.estebancarranza.reparto.sharedPreferences;
 
 public class PREFF_NAME {
     public static final String PREFF_NAME = "SETTINGS";
+    public static final String HOST_NAME = "HOST_NAME";
 }

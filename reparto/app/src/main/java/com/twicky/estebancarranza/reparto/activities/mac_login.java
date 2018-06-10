@@ -126,6 +126,8 @@ public class mac_login extends AppCompatActivity {
 
                 Toast.makeText(mac_login.this, "No guardaste el usuario localmente, la proxima vez que inicies se tendrá que tener conexión a internet", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
+                setVendedor(vendedor);
+                startActivity(new Intent(mac_login.this, mac_home_con_ruta.class));
             }
         });
 

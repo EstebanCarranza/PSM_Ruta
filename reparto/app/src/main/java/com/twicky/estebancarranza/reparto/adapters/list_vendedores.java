@@ -78,12 +78,14 @@ public class list_vendedores extends RecyclerView.Adapter<list_vendedores.ViewHo
 
         TextView lblNombreVendedor;
         TextView lblID;
+        TextView lblCorreo;
 
         public ViewHolderDatos(final View itemView) {
             super(itemView);
 
             lblNombreVendedor = itemView.findViewById(R.id.lblNombreVendedor);
             lblID = itemView.findViewById(R.id.lblID);
+            lblCorreo = itemView.findViewById(R.id.lblCorreo);
             /*
             lblNombreVendedor.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -104,6 +106,7 @@ public class list_vendedores extends RecyclerView.Adapter<list_vendedores.ViewHo
             else
                 lblNombreVendedor.setText(vendedor.getNombres() + " " + vendedor.getAppat());
            lblID.setText(String.valueOf(vendedor.getIdVendedor()));
+            lblCorreo.setText(vendedor.getCorreo().toString());
 
         }
     }

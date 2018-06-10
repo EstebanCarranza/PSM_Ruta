@@ -105,6 +105,16 @@ public class vendedorSQL extends SQLHelper{
 
         db.close();
     }
+
+    public void deleteAll()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.delete(tbl_psm_vendedor.name, null, null);
+
+        db.close();
+    }
+
     public vendedor getVendedor(int idVendedor)
     {
         vendedor vendedor = null;

@@ -106,8 +106,10 @@
         <service android:name=".services.synchronizeClientsInBackground" />
 
         <activity android:name=".activities.mac_bubble" />
-        <activity android:name=".activities.mac_datos_personales"
-            android:parentActivityName=".activities.mac_configuracion"></activity>
+        <activity
+            android:name=".activities.mac_datos_personales"
+            android:parentActivityName=".activities.mac_configuracion" />
+        <activity android:name=".activities.mac_config_host" android:parentActivityName=".activities.mac_configuracion"></activity>
     </application>
 
 </manifest>

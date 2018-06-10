@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.twicky.estebancarranza.reparto.R;
+import com.twicky.estebancarranza.reparto.database.helpers.vendedorSQL;
 import com.twicky.estebancarranza.reparto.estaticos.global;
 import com.twicky.estebancarranza.reparto.models.vendedor;
 import com.twicky.estebancarranza.reparto.sharedPreferences.login;
@@ -22,6 +23,9 @@ import static com.twicky.estebancarranza.reparto.sensores.luz.m_sensorManager;
 import static com.twicky.estebancarranza.reparto.sensores.luz.ln;
 import static com.twicky.estebancarranza.reparto.sensores.luz.m_sensor;
 import static com.twicky.estebancarranza.reparto.sensores.luz.intensidad;
+import static com.twicky.estebancarranza.reparto.sharedPreferences.host.getHost;
+import static com.twicky.estebancarranza.reparto.sharedPreferences.login.setLoginAuto;
+import static com.twicky.estebancarranza.reparto.webservice.staticData.setHOST;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,6 +62,17 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnRegistro = (Button) findViewById(R.id.btnRegistro);
+
+        String host = getHost(getApplicationContext());
+        if(host.isEmpty())
+            Toast.makeText(this, "No hay host definido", Toast.LENGTH_SHORT).show();
+        else {
+            Toast.makeText(this, "El host definido es: " + getHost(getApplicationContext()), Toast.LENGTH_SHORT).show();
+            setHOST(getHost(getApplicationContext()));
+        }
+        //vendedorSQL db = new vendedorSQL(getApplicationContext());
+        //db.deleteAll();
+        //setLoginAuto(getApplicationContext(), false, "", "");
 
         //Crear vendedor para loguearse
         vendedor vendedor = null;

@@ -65,6 +65,9 @@ public class mac_configuracion extends AppCompatActivity {
     //    menu.add(new list_buttons.Boton(getString(R.string.strCONFIG_PINTitle), getString(R.string.strCONFIG_PINDesc), ID.CONFIG.btnAgregarPIN));
         menu.add(new list_buttons.Boton(getString(R.string.strCONFIG_DatosUsuarioTitle), getString(R.string.strCONFIG_DatosUsuarioDesc), ID.CONFIG.btnVerDatosPersonales));
         menu.add(new list_buttons.Boton(getString(R.string.btnSincronizarTitle), getString(R.string.btnSincronizarDetalle), ID.CONFIG.btnSincronizar));
+        menu.add(new list_buttons.Boton(getString(R.string.btnObtenerClientesTitle), getString(R.string.btnObtenerClientesDetalle), ID.CONFIG.btnObtenerClientes));
+        menu.add(new list_buttons.Boton(getString(R.string.btnCambiarHOSTTitle), getString(R.string.btnCambiarHOSTDetail), ID.CONFIG.btnCambiarHOST));
+
         menu.add(new list_buttons.Boton(getString(R.string.strCONFIG_CerrarSesionTitle), getString(R.string.strCONFIG_CerrarSesionDesc), ID.CONFIG.btnCerrarSesion));
 
 
@@ -104,7 +107,15 @@ public class mac_configuracion extends AppCompatActivity {
                         startActivity(new Intent(mac_configuracion.this, MainActivity.class));
                     break;
 
-                    case ID.CONFIG.btnSincronizar: {
+                    case ID.CONFIG.btnCambiarHOST:
+                    {
+                        startActivity(new Intent(mac_configuracion.this, mac_config_host.class));
+                    }
+                    break;
+
+
+                    case ID.CONFIG.btnObtenerClientes:
+                    {
                         new networking(mac_configuracion.this, new NetCallback() {
 
                             @Override
@@ -115,39 +126,47 @@ public class mac_configuracion extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-
-                                        clienteSQL db = new clienteSQL(getApplicationContext());
-                                        db.insertIfNotExists(clientes);
-                                        Toast.makeText(mac_configuracion.this, "Clientes sincronizados correctamente", Toast.LENGTH_SHORT).show();
+                                        if(clientes.size() > 0) {
+                                            clienteSQL db = new clienteSQL(getApplicationContext());
+                                            db.insertIfNotExists(clientes);
+                                            Toast.makeText(mac_configuracion.this, "Obteniendo clientes sincronizados...", Toast.LENGTH_SHORT).show();
+                                        }
 
                                     }
                                 });
                             }
                         }).execute("getSynchronizeClient");
+                    }
+                    break;
 
+                    case ID.CONFIG.btnSincronizar: {
 
                         clienteSQL db = new clienteSQL(getApplicationContext());
                         final ArrayList<cliente> clientes = db.getCliente(0, 0);
                         int i = 0;
+                        if(clientes.size()> 0) {
 
-                        new networking(mac_configuracion.this, new NetCallback() {
+                            new networking(mac_configuracion.this, new NetCallback() {
 
-                            @Override
-                            public void onWorkFinish(Object data) {
-                                //final ArrayList<results> results = (ArrayList<results>) data;
-                                final String results = (String) data;
+                                @Override
+                                public void onWorkFinish(Object data) {
+                                    //final ArrayList<results> results = (ArrayList<results>) data;
+                                    final String results = (String) data;
 
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
 
-                                        Toast.makeText(mac_configuracion.this, results, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(mac_configuracion.this, results, Toast.LENGTH_SHORT).show();
 
 
-                                    }
-                                });
-                            }
-                        }).execute("SynchronizeClient", clientes);
+                                        }
+                                    });
+                                }
+                            }).execute("SynchronizeClient", clientes);
+                        }
+
+
                     }
                     break;
                 }

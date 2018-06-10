@@ -116,7 +116,8 @@
             android:layout_weight=".50"
             android:text="Registrar con facebook"
             android:textColor="@color/text_colorBtn"
-            android:textColorHint="@color/text_colorHint" />
+            android:textColorHint="@color/text_colorHint"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

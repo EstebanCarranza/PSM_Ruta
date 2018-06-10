@@ -155,6 +155,10 @@
 
     <string name="btnSincronizarTitle">Sincronizar clientes</string>
     <string name="btnSincronizarDetalle">Sincronizar clientes con el servidor remoto</string>
+    <string name="btnObtenerClientesTitle">Obtener clientes del servidor</string>
+    <string name="btnObtenerClientesDetalle">Obtener clientes guardados en el servidor</string>
+    <string name="btnCambiarHOSTTitle">Cambiar host remoto</string>
+    <string name="btnCambiarHOSTDetail">Permite cambiar la dirección IP del host remoto</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>

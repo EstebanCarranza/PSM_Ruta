@@ -49,6 +49,8 @@ public class ID {
         public static final String btnVerDatosPersonales = "btnVerDatosPersonales";
         public static final String btnCerrarSesion = "btnCerrarSesion";
         public static final String btnSincronizar = "btnSincronizar";
+        public static final String btnObtenerClientes = "btnObtenerClientes";
+        public static final String btnCambiarHOST = "btnCambiarHOST";
     }
 
 

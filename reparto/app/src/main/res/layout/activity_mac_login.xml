@@ -91,7 +91,8 @@
             android:layout_weight="0.50"
             android:text="Iniciar sesión con facebook"
             android:textColor="@color/text_colorBtn"
-            android:textColorHint="@color/text_colorHint" />
+            android:textColorHint="@color/text_colorHint"
+            android:visibility="gone" />
     </LinearLayout>
 
 
